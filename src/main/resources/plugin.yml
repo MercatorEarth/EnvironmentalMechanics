@@ -1,0 +1,8 @@
+name: EnvironmentalMechanics
+version: '${project.version}'
+main: com.mercator.environmentalmechanics.EnvironmentalMechanics
+api-version: 1.18
+prefix: EnvMechanics
+authors: [ ProPane865 ]
+description: A plugin for environmental mechanics in Mercator 2.
+website: mercatorearth.netlify.app
