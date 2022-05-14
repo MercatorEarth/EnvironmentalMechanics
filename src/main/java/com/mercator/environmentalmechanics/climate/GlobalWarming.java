@@ -19,10 +19,10 @@ public class GlobalWarming implements Listener {
     public int nitrousOxideConcentration;
     public int waterVaporConcentration;
 
-    private Map<String, Double> carbonDioxideGenValues;
-    private Map<String, Double> methaneGenValues;
-    private Map<String, Double> nitrousOxideGenValues;
-    private Map<String, Double> waterVaporGenValues;
+    private Map<String, Float> carbonDioxideGenValues;
+    private Map<String, Float> methaneGenValues;
+    private Map<String, Float> nitrousOxideGenValues;
+    private Map<String, Float> waterVaporGenValues;
 
     private File carbonDioxideGenValuesFR;
     private YamlConfiguration carbonDioxideGenValuesF;
@@ -387,28 +387,28 @@ public class GlobalWarming implements Listener {
             carbonDioxideGenValuesF.createSection("minecraft:green_banner");
             carbonDioxideGenValuesF.createSection("minecraft:red_banner");
             carbonDioxideGenValuesF.createSection("minecraft:black_banner");
-            carbonDioxideGenValuesF.set("minecraft:white_banner", 1.5f);
-            carbonDioxideGenValuesF.set("minecraft:orange_banner", 1.5f);
-            carbonDioxideGenValuesF.set("minecraft:magenta_banner", 1.5f);
-            carbonDioxideGenValuesF.set("minecraft:light_blue_banner", 1.5f);
-            carbonDioxideGenValuesF.set("minecraft:yellow_banner", 1.5f);
-            carbonDioxideGenValuesF.set("minecraft:lime_banner", 1.5f);
-            carbonDioxideGenValuesF.set("minecraft:pink_banner", 1.5f);
-            carbonDioxideGenValuesF.set("minecraft:gray_banner", 1.5f);
-            carbonDioxideGenValuesF.set("minecraft:light_gray_banner", 1.5);
-            carbonDioxideGenValuesF.set("minecraft:cyan_banner", 1.5f);
-            carbonDioxideGenValuesF.set("minecraft:purple_banner", 1.5f);
-            carbonDioxideGenValuesF.set("minecraft:blue_banner", 1.5f);
-            carbonDioxideGenValuesF.set("minecraft:brown_banner", 1.5f);
-            carbonDioxideGenValuesF.set("minecraft:green_banner", 1.5f);
-            carbonDioxideGenValuesF.set("minecraft:red_banner", 1.5f);
-            carbonDioxideGenValuesF.set("minecraft:black_banner", 1.5f);
+            carbonDioxideGenValuesF.set("minecraft:white_banner", 1.5f * 2.4f);
+            carbonDioxideGenValuesF.set("minecraft:orange_banner", 1.5f * 2.4f);
+            carbonDioxideGenValuesF.set("minecraft:magenta_banner", 1.5f * 2.4f);
+            carbonDioxideGenValuesF.set("minecraft:light_blue_banner", 1.5f * 2.4f);
+            carbonDioxideGenValuesF.set("minecraft:yellow_banner", 1.5f * 2.4f);
+            carbonDioxideGenValuesF.set("minecraft:lime_banner", 1.5f * 2.4f);
+            carbonDioxideGenValuesF.set("minecraft:pink_banner", 1.5f * 2.4f);
+            carbonDioxideGenValuesF.set("minecraft:gray_banner", 1.5f * 2.4f);
+            carbonDioxideGenValuesF.set("minecraft:light_gray_banner", 1.5f * 2.4f);
+            carbonDioxideGenValuesF.set("minecraft:cyan_banner", 1.5f * 2.4f);
+            carbonDioxideGenValuesF.set("minecraft:purple_banner", 1.5f * 2.4f);
+            carbonDioxideGenValuesF.set("minecraft:blue_banner", 1.5f * 2.4f);
+            carbonDioxideGenValuesF.set("minecraft:brown_banner", 1.5f * 2.4f);
+            carbonDioxideGenValuesF.set("minecraft:green_banner", 1.5f * 2.4f);
+            carbonDioxideGenValuesF.set("minecraft:red_banner", 1.5f * 2.4f);
+            carbonDioxideGenValuesF.set("minecraft:black_banner", 1.5f * 2.4f);
 
             carbonDioxideGenValuesF.createSection("minecraft:fishing_rod");
-            carbonDioxideGenValuesF.set("minecraft:fishing_rod", 1.5f);
+            carbonDioxideGenValuesF.set("minecraft:fishing_rod", 1.5f * 1.8f);
 
             carbonDioxideGenValuesF.createSection("minecraft:scaffolding");
-            carbonDioxideGenValuesF.set("minecraft:scaffolding", 2.0f);
+            carbonDioxideGenValuesF.set("minecraft:scaffolding", 2.0f * 1.5f);
 
             carbonDioxideGenValuesF.createSection("minecraft:oak_boat");
             carbonDioxideGenValuesF.createSection("minecraft:spruce_boat");
@@ -416,12 +416,12 @@ public class GlobalWarming implements Listener {
             carbonDioxideGenValuesF.createSection("minecraft:jungle_boat");
             carbonDioxideGenValuesF.createSection("minecraft:acacia_boat");
             carbonDioxideGenValuesF.createSection("minecraft:dark_oak_boat");
-            carbonDioxideGenValuesF.set("minecraft:oak_boat", 6.0f);
-            carbonDioxideGenValuesF.set("minecraft:spruce_boat", 6.0f);
-            carbonDioxideGenValuesF.set("minecraft:birch_boat", 6.0f);
-            carbonDioxideGenValuesF.set("minecraft:jungle_boat", 6.0f);
-            carbonDioxideGenValuesF.set("minecraft:acacia_boat", 6.0f);
-            carbonDioxideGenValuesF.set("minecraft:dark_oak_boat", 6.0f);
+            carbonDioxideGenValuesF.set("minecraft:oak_boat", 6.0f * 1.8f);
+            carbonDioxideGenValuesF.set("minecraft:spruce_boat", 6.0f * 1.8f);
+            carbonDioxideGenValuesF.set("minecraft:birch_boat", 6.0f * 1.8f);
+            carbonDioxideGenValuesF.set("minecraft:jungle_boat", 6.0f * 1.8f);
+            carbonDioxideGenValuesF.set("minecraft:acacia_boat", 6.0f * 1.8f);
+            carbonDioxideGenValuesF.set("minecraft:dark_oak_boat", 6.0f * 1.8f);
 
             carbonDioxideGenValuesF.createSection("minecraft:charcoal");
             carbonDioxideGenValuesF.set("minecraft:charcoal", 8.0f * 1.2f);
@@ -457,7 +457,7 @@ public class GlobalWarming implements Listener {
         File carbonDioxideValueF = new File("plugins/EnvironmentalMechanics/globalwarming/carbondioxide.txt");
         PluginDataInterpreter.write(carbonDioxideValueF, carbonDioxideConcentration);
 
-        PluginDataInterpreter.genDoubleMapFromConfig(carbonDioxideGenValuesF, carbonDioxideGenValues);
+        PluginDataInterpreter.genFloatMapFromConfig(carbonDioxideGenValuesF, carbonDioxideGenValues);
     }
 
     @EventHandler
