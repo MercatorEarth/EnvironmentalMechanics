@@ -19,10 +19,10 @@ public class GlobalWarming implements Listener {
     public int nitrousOxideConcentration;
     public int waterVaporConcentration;
 
-    private Map<String, Float> carbonDioxideGenValues;
-    private Map<String, Float> methaneGenValues;
-    private Map<String, Float> nitrousOxideGenValues;
-    private Map<String, Float> waterVaporGenValues;
+    private Map<String, Double> carbonDioxideGenValues;
+    private Map<String, Double> methaneGenValues;
+    private Map<String, Double> nitrousOxideGenValues;
+    private Map<String, Double> waterVaporGenValues;
 
     private File carbonDioxideGenValuesFR;
     private YamlConfiguration carbonDioxideGenValuesF;
@@ -457,7 +457,7 @@ public class GlobalWarming implements Listener {
         File carbonDioxideValueF = new File("plugins/EnvironmentalMechanics/globalwarming/carbondioxide.txt");
         PluginDataInterpreter.write(carbonDioxideValueF, carbonDioxideConcentration);
 
-        PluginDataInterpreter.genFloatMapFromConfig(carbonDioxideGenValuesF, carbonDioxideGenValues);
+        PluginDataInterpreter.genDoubleMapFromConfig(carbonDioxideGenValuesF, carbonDioxideGenValues);
     }
 
     @EventHandler
