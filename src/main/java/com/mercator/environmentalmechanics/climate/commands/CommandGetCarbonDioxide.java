@@ -19,8 +19,9 @@ public class CommandGetCarbonDioxide implements CommandExecutor {
         try {
             File carbonDioxideValueF = new File("plugins/EnvironmentalMechanics/globalwarming/carbondioxide.txt");
             String carbonDioxideValueR = PluginDataInterpreter.read(carbonDioxideValueF);
+            Double carbonDioxideValue = Double.parseDouble(carbonDioxideValueR);
 
-            sender.sendMessage(ChatColor.YELLOW + "The current carbon dioxide level is " + carbonDioxideValueR + ".");
+            sender.sendMessage(ChatColor.YELLOW + "The current carbon dioxide level is " + Math.round(carbonDioxideValue) + ".");
 
             triggered = true;
         }

@@ -14,15 +14,15 @@ import java.util.Map;
 
 public class GlobalWarming implements Listener {
 
-    public int carbonDioxideConcentration;
-    public int methaneConcentration;
-    public int nitrousOxideConcentration;
-    public int waterVaporConcentration;
+    public double carbonDioxideConcentration;
+    public double methaneConcentration;
+    public double nitrousOxideConcentration;
+    public double waterVaporConcentration;
 
-    private Map<String, Float> carbonDioxideGenValues;
-    private Map<String, Float> methaneGenValues;
-    private Map<String, Float> nitrousOxideGenValues;
-    private Map<String, Float> waterVaporGenValues;
+    private Map<String, Double> carbonDioxideGenValues;
+    private Map<String, Double> methaneGenValues;
+    private Map<String, Double> nitrousOxideGenValues;
+    private Map<String, Double> waterVaporGenValues;
 
     private File carbonDioxideGenValuesFR;
     private YamlConfiguration carbonDioxideGenValuesF;
@@ -38,7 +38,7 @@ public class GlobalWarming implements Listener {
 
         if (!carbonDioxideGenValuesFR.exists()) {
             carbonDioxideGenValuesF.createSection("minecraft:bamboo");
-            carbonDioxideGenValuesF.set("minecraft:bamboo", 0.25f * 1.5f);
+            carbonDioxideGenValuesF.set("minecraft:bamboo", 0.25 * 1.5);
 
             carbonDioxideGenValuesF.createSection("minecraft:white_carpet");
             carbonDioxideGenValuesF.createSection("minecraft:orange_carpet");
@@ -56,22 +56,22 @@ public class GlobalWarming implements Listener {
             carbonDioxideGenValuesF.createSection("minecraft:green_carpet");
             carbonDioxideGenValuesF.createSection("minecraft:red_carpet");
             carbonDioxideGenValuesF.createSection("minecraft:black_carpet");
-            carbonDioxideGenValuesF.set("minecraft:white_carpet", 0.335f * 2.4f);
-            carbonDioxideGenValuesF.set("minecraft:orange_carpet", 0.335f * 2.4f);
-            carbonDioxideGenValuesF.set("minecraft:magenta_carpet", 0.335f * 2.4f);
-            carbonDioxideGenValuesF.set("minecraft:light_blue_carpet", 0.335f * 2.4f);
-            carbonDioxideGenValuesF.set("minecraft:yellow_carpet", 0.335f * 2.4f);
-            carbonDioxideGenValuesF.set("minecraft:lime_carpet", 0.335f * 2.4f);
-            carbonDioxideGenValuesF.set("minecraft:pink_carpet", 0.335f * 2.4f);
-            carbonDioxideGenValuesF.set("minecraft:gray_carpet", 0.335f * 2.4f);
-            carbonDioxideGenValuesF.set("minecraft:light_gray_carpet", 0.335f * 2.4f);
-            carbonDioxideGenValuesF.set("minecraft:cyan_carpet", 0.335f * 2.4f);
-            carbonDioxideGenValuesF.set("minecraft:purple_carpet", 0.335f * 2.4f);
-            carbonDioxideGenValuesF.set("minecraft:blue_carpet", 0.335f * 2.4f);
-            carbonDioxideGenValuesF.set("minecraft:brown_carpet", 0.335f * 2.4f);
-            carbonDioxideGenValuesF.set("minecraft:green_carpet", 0.335f * 2.4f);
-            carbonDioxideGenValuesF.set("minecraft:red_carpet", 0.335f * 2.4f);
-            carbonDioxideGenValuesF.set("minecraft:black_carpet", 0.335f * 2.4f);
+            carbonDioxideGenValuesF.set("minecraft:white_carpet", 0.335 * 2.4);
+            carbonDioxideGenValuesF.set("minecraft:orange_carpet", 0.335 * 2.4);
+            carbonDioxideGenValuesF.set("minecraft:magenta_carpet", 0.335 * 2.4);
+            carbonDioxideGenValuesF.set("minecraft:light_blue_carpet", 0.335 * 2.4);
+            carbonDioxideGenValuesF.set("minecraft:yellow_carpet", 0.335 * 2.4);
+            carbonDioxideGenValuesF.set("minecraft:lime_carpet", 0.335 * 2.4);
+            carbonDioxideGenValuesF.set("minecraft:pink_carpet", 0.335 * 2.4);
+            carbonDioxideGenValuesF.set("minecraft:gray_carpet", 0.335 * 2.4);
+            carbonDioxideGenValuesF.set("minecraft:light_gray_carpet", 0.335 * 2.4);
+            carbonDioxideGenValuesF.set("minecraft:cyan_carpet", 0.335 * 2.4);
+            carbonDioxideGenValuesF.set("minecraft:purple_carpet", 0.335 * 2.4);
+            carbonDioxideGenValuesF.set("minecraft:blue_carpet", 0.335 * 2.4);
+            carbonDioxideGenValuesF.set("minecraft:brown_carpet", 0.335 * 2.4);
+            carbonDioxideGenValuesF.set("minecraft:green_carpet", 0.335 * 2.4);
+            carbonDioxideGenValuesF.set("minecraft:red_carpet", 0.335 * 2.4);
+            carbonDioxideGenValuesF.set("minecraft:black_carpet", 0.335 * 2.4);
 
             carbonDioxideGenValuesF.createSection("minecraft:oak_button");
             carbonDioxideGenValuesF.createSection("minecraft:spruce_button");
@@ -79,15 +79,15 @@ public class GlobalWarming implements Listener {
             carbonDioxideGenValuesF.createSection("minecraft:jungle_button");
             carbonDioxideGenValuesF.createSection("minecraft:acacia_button");
             carbonDioxideGenValuesF.createSection("minecraft:dark_oak_button");
-            carbonDioxideGenValuesF.set("minecraft:oak_button", 0.5f * 1.8f);
-            carbonDioxideGenValuesF.set("minecraft:spruce_button", 0.5f * 1.8f);
-            carbonDioxideGenValuesF.set("minecraft:birch_button", 0.5f * 1.8f);
-            carbonDioxideGenValuesF.set("minecraft:jungle_button", 0.5f * 1.8f);
-            carbonDioxideGenValuesF.set("minecraft:acacia_button", 0.5f * 1.8f);
-            carbonDioxideGenValuesF.set("minecraft:dark_oak_button", 0.5f * 1.8f);
+            carbonDioxideGenValuesF.set("minecraft:oak_button", 0.5 * 1.8);
+            carbonDioxideGenValuesF.set("minecraft:spruce_button", 0.5 * 1.8);
+            carbonDioxideGenValuesF.set("minecraft:birch_button", 0.5 * 1.8);
+            carbonDioxideGenValuesF.set("minecraft:jungle_button", 0.5 * 1.8);
+            carbonDioxideGenValuesF.set("minecraft:acacia_button", 0.5 * 1.8);
+            carbonDioxideGenValuesF.set("minecraft:dark_oak_button", 0.5 * 1.8);
 
             carbonDioxideGenValuesF.createSection("minecraft:bowl");
-            carbonDioxideGenValuesF.set("minecraft:bowl", 0.5f);
+            carbonDioxideGenValuesF.set("minecraft:bowl", 0.5 * 1.8);
 
             carbonDioxideGenValuesF.createSection("minecraft:oak_sapling");
             carbonDioxideGenValuesF.createSection("minecraft:spruce_sapling");
@@ -95,20 +95,20 @@ public class GlobalWarming implements Listener {
             carbonDioxideGenValuesF.createSection("minecraft:jungle_sapling");
             carbonDioxideGenValuesF.createSection("minecraft:acacia_sapling");
             carbonDioxideGenValuesF.createSection("minecraft:dark_oak_sapling");
-            carbonDioxideGenValuesF.set("minecraft:oak_sapling", 0.5f * 3.0f);
-            carbonDioxideGenValuesF.set("minecraft:spruce_sapling", 0.5f * 3.0f);
-            carbonDioxideGenValuesF.set("minecraft:birch_sapling", 0.5f * 3.0f);
-            carbonDioxideGenValuesF.set("minecraft:jungle_sapling", 0.5f * 3.0f);
-            carbonDioxideGenValuesF.set("minecraft:acacia_sapling", 0.5f * 3.0f);
-            carbonDioxideGenValuesF.set("minecraft:dark_oak_sapling", 0.5f * 3.0f);
+            carbonDioxideGenValuesF.set("minecraft:oak_sapling", 0.5 * 3.0);
+            carbonDioxideGenValuesF.set("minecraft:spruce_sapling", 0.5 * 3.0);
+            carbonDioxideGenValuesF.set("minecraft:birch_sapling", 0.5 * 3.0);
+            carbonDioxideGenValuesF.set("minecraft:jungle_sapling", 0.5 * 3.0);
+            carbonDioxideGenValuesF.set("minecraft:acacia_sapling", 0.5 * 3.0);
+            carbonDioxideGenValuesF.set("minecraft:dark_oak_sapling", 0.5 * 3.0);
 
             carbonDioxideGenValuesF.createSection("minecraft:stick");
-            carbonDioxideGenValuesF.set("minecraft:stick", 0.5f * 1.8f);
+            carbonDioxideGenValuesF.set("minecraft:stick", 0.5 * 1.8);
 
             carbonDioxideGenValuesF.createSection("minecraft:azalea");
             carbonDioxideGenValuesF.createSection("minecraft:flowering_azalea");
-            carbonDioxideGenValuesF.set("minecraft:azalea", 0.5f * 3.0f);
-            carbonDioxideGenValuesF.set("minecraft:flowering_azalea", 0.5f * 3.0f);
+            carbonDioxideGenValuesF.set("minecraft:azalea", 0.5 * 3.0);
+            carbonDioxideGenValuesF.set("minecraft:flowering_azalea", 0.5 * 3.0);
 
             carbonDioxideGenValuesF.createSection("minecraft:white_wool");
             carbonDioxideGenValuesF.createSection("minecraft:orange_wool");
@@ -126,22 +126,22 @@ public class GlobalWarming implements Listener {
             carbonDioxideGenValuesF.createSection("minecraft:green_wool");
             carbonDioxideGenValuesF.createSection("minecraft:red_wool");
             carbonDioxideGenValuesF.createSection("minecraft:black_wool");
-            carbonDioxideGenValuesF.set("minecraft:white_wool", 0.5f * 2.4f);
-            carbonDioxideGenValuesF.set("minecraft:orange_wool", 0.5f * 2.4f);
-            carbonDioxideGenValuesF.set("minecraft:magenta_wool", 0.5f * 2.4f);
-            carbonDioxideGenValuesF.set("minecraft:light_blue_wool", 0.5f * 2.4f);
-            carbonDioxideGenValuesF.set("minecraft:yellow_wool", 0.5f * 2.4f);
-            carbonDioxideGenValuesF.set("minecraft:lime_wool", 0.5f * 2.4f);
-            carbonDioxideGenValuesF.set("minecraft:pink_wool", 0.5f * 2.4f);
-            carbonDioxideGenValuesF.set("minecraft:gray_wool", 0.5f * 2.4f);
-            carbonDioxideGenValuesF.set("minecraft:light_gray_wool", 0.5f * 2.4f);
-            carbonDioxideGenValuesF.set("minecraft:cyan_wool", 0.5f * 2.4f);
-            carbonDioxideGenValuesF.set("minecraft:purple_wool", 0.5f * 2.4f);
-            carbonDioxideGenValuesF.set("minecraft:blue_wool", 0.5f * 2.4f);
-            carbonDioxideGenValuesF.set("minecraft:brown_wool", 0.5f * 2.4f);
-            carbonDioxideGenValuesF.set("minecraft:green_wool", 0.5f * 2.4f);
-            carbonDioxideGenValuesF.set("minecraft:red_wool", 0.5f * 2.4f);
-            carbonDioxideGenValuesF.set("minecraft:black_wool", 0.5f * 2.4f);
+            carbonDioxideGenValuesF.set("minecraft:white_wool", 0.5 * 2.4);
+            carbonDioxideGenValuesF.set("minecraft:orange_wool", 0.5 * 2.4);
+            carbonDioxideGenValuesF.set("minecraft:magenta_wool", 0.5 * 2.4);
+            carbonDioxideGenValuesF.set("minecraft:light_blue_wool", 0.5 * 2.4);
+            carbonDioxideGenValuesF.set("minecraft:yellow_wool", 0.5 * 2.4);
+            carbonDioxideGenValuesF.set("minecraft:lime_wool", 0.5 * 2.4);
+            carbonDioxideGenValuesF.set("minecraft:pink_wool", 0.5 * 2.4);
+            carbonDioxideGenValuesF.set("minecraft:gray_wool", 0.5 * 2.4);
+            carbonDioxideGenValuesF.set("minecraft:light_gray_wool", 0.5 * 2.4);
+            carbonDioxideGenValuesF.set("minecraft:cyan_wool", 0.5 * 2.4);
+            carbonDioxideGenValuesF.set("minecraft:purple_wool", 0.5 * 2.4);
+            carbonDioxideGenValuesF.set("minecraft:blue_wool", 0.5 * 2.4);
+            carbonDioxideGenValuesF.set("minecraft:brown_wool", 0.5 * 2.4);
+            carbonDioxideGenValuesF.set("minecraft:green_wool", 0.5 * 2.4);
+            carbonDioxideGenValuesF.set("minecraft:red_wool", 0.5 * 2.4);
+            carbonDioxideGenValuesF.set("minecraft:black_wool", 0.5 * 2.4);
 
             carbonDioxideGenValuesF.createSection("minecraft:oak_slab");
             carbonDioxideGenValuesF.createSection("minecraft:spruce_slab");
@@ -149,18 +149,18 @@ public class GlobalWarming implements Listener {
             carbonDioxideGenValuesF.createSection("minecraft:jungle_slab");
             carbonDioxideGenValuesF.createSection("minecraft:acacia_slab");
             carbonDioxideGenValuesF.createSection("minecraft:dark_oak_slab");
-            carbonDioxideGenValuesF.set("minecraft:oak_slab", 0.75f * 1.8f);
-            carbonDioxideGenValuesF.set("minecraft:spruce_slab", 0.75f * 1.8f);
-            carbonDioxideGenValuesF.set("minecraft:birch_slab", 0.75f * 1.8f);
-            carbonDioxideGenValuesF.set("minecraft:jungle_slab", 0.75f * 1.8f);
-            carbonDioxideGenValuesF.set("minecraft:acacia_slab", 0.75f * 1.8f);
-            carbonDioxideGenValuesF.set("minecraft:dark_oak_slab", 0.75f * 1.8f);
+            carbonDioxideGenValuesF.set("minecraft:oak_slab", 0.75 * 1.8);
+            carbonDioxideGenValuesF.set("minecraft:spruce_slab", 0.75 * 1.8);
+            carbonDioxideGenValuesF.set("minecraft:birch_slab", 0.75 * 1.8);
+            carbonDioxideGenValuesF.set("minecraft:jungle_slab", 0.75 * 1.8);
+            carbonDioxideGenValuesF.set("minecraft:acacia_slab", 0.75 * 1.8);
+            carbonDioxideGenValuesF.set("minecraft:dark_oak_slab", 0.75 * 1.8);
 
             carbonDioxideGenValuesF.createSection("minecraft:crossbow");
-            carbonDioxideGenValuesF.set("minecraft:crossbow", 1.5f * 2.0f);
+            carbonDioxideGenValuesF.set("minecraft:crossbow", 1.5 * 2.0);
 
             carbonDioxideGenValuesF.createSection("minecraft:bow");
-            carbonDioxideGenValuesF.set("minecraft:bow", 1.5f * 2.0f);
+            carbonDioxideGenValuesF.set("minecraft:bow", 1.5 * 2.0);
 
             carbonDioxideGenValuesF.createSection("minecraft:oak_door");
             carbonDioxideGenValuesF.createSection("minecraft:spruce_door");
@@ -168,12 +168,12 @@ public class GlobalWarming implements Listener {
             carbonDioxideGenValuesF.createSection("minecraft:jungle_door");
             carbonDioxideGenValuesF.createSection("minecraft:acacia_door");
             carbonDioxideGenValuesF.createSection("minecraft:dark_oak_door");
-            carbonDioxideGenValuesF.set("minecraft:oak_door", 1.0f * 1.8f);
-            carbonDioxideGenValuesF.set("minecraft:spruce_door", 1.0f * 1.8f);
-            carbonDioxideGenValuesF.set("minecraft:birch_door", 1.0f * 1.8f);
-            carbonDioxideGenValuesF.set("minecraft:jungle_door", 1.0f * 1.8f);
-            carbonDioxideGenValuesF.set("minecraft:acacia_door", 1.0f * 1.8f);
-            carbonDioxideGenValuesF.set("minecraft:dark_oak_door", 1.0f * 1.8f);
+            carbonDioxideGenValuesF.set("minecraft:oak_door", 1.0 * 1.8);
+            carbonDioxideGenValuesF.set("minecraft:spruce_door", 1.0 * 1.8);
+            carbonDioxideGenValuesF.set("minecraft:birch_door", 1.0 * 1.8);
+            carbonDioxideGenValuesF.set("minecraft:jungle_door", 1.0 * 1.8);
+            carbonDioxideGenValuesF.set("minecraft:acacia_door", 1.0 * 1.8);
+            carbonDioxideGenValuesF.set("minecraft:dark_oak_door", 1.0 * 1.8);
 
             carbonDioxideGenValuesF.createSection("minecraft:oak_sign");
             carbonDioxideGenValuesF.createSection("minecraft:spruce_sign");
@@ -181,23 +181,23 @@ public class GlobalWarming implements Listener {
             carbonDioxideGenValuesF.createSection("minecraft:jungle_sign");
             carbonDioxideGenValuesF.createSection("minecraft:acacia_sign");
             carbonDioxideGenValuesF.createSection("minecraft:dark_oak_sign");
-            carbonDioxideGenValuesF.set("minecraft:oak_sign", 1.0f * 1.8f);
-            carbonDioxideGenValuesF.set("minecraft:spruce_sign", 1.0f * 1.8f);
-            carbonDioxideGenValuesF.set("minecraft:birch_sign", 1.0f * 1.8f);
-            carbonDioxideGenValuesF.set("minecraft:jungle_sign", 1.0f * 1.8f);
-            carbonDioxideGenValuesF.set("minecraft:acacia_sign", 1.0f * 1.8f);
-            carbonDioxideGenValuesF.set("minecraft:dark_oak_sign", 1.0f * 1.8f);
+            carbonDioxideGenValuesF.set("minecraft:oak_sign", 1.0 * 1.8);
+            carbonDioxideGenValuesF.set("minecraft:spruce_sign", 1.0 * 1.8);
+            carbonDioxideGenValuesF.set("minecraft:birch_sign", 1.0 * 1.8);
+            carbonDioxideGenValuesF.set("minecraft:jungle_sign", 1.0 * 1.8);
+            carbonDioxideGenValuesF.set("minecraft:acacia_sign", 1.0 * 1.8);
+            carbonDioxideGenValuesF.set("minecraft:dark_oak_sign", 1.0 * 1.8);
 
             carbonDioxideGenValuesF.createSection("minecraft:wooden_pickaxe");
             carbonDioxideGenValuesF.createSection("minecraft:wooden_shovel");
             carbonDioxideGenValuesF.createSection("minecraft:wooden_hoe");
             carbonDioxideGenValuesF.createSection("minecraft:wooden_axe");
             carbonDioxideGenValuesF.createSection("minecraft:wooden_sword");
-            carbonDioxideGenValuesF.set("minecraft:wooden_pickaxe", 1.0f * 1.8f);
-            carbonDioxideGenValuesF.set("minecraft:wooden_shovel", 1.0f * 1.8f);
-            carbonDioxideGenValuesF.set("minecraft:wooden_hoe", 1.0f * 1.8f);
-            carbonDioxideGenValuesF.set("minecraft:wooden_axe", 1.0f * 1.8f);
-            carbonDioxideGenValuesF.set("minecraft:wooden_sword", 1.0f * 1.8f);
+            carbonDioxideGenValuesF.set("minecraft:wooden_pickaxe", 1.0 * 1.8);
+            carbonDioxideGenValuesF.set("minecraft:wooden_shovel", 1.0 * 1.8);
+            carbonDioxideGenValuesF.set("minecraft:wooden_hoe", 1.0 * 1.8);
+            carbonDioxideGenValuesF.set("minecraft:wooden_axe", 1.0 * 1.8);
+            carbonDioxideGenValuesF.set("minecraft:wooden_sword", 1.0 * 1.8);
 
             carbonDioxideGenValuesF.createSection("minecraft:oak_log");
             carbonDioxideGenValuesF.createSection("minecraft:spruce_log");
@@ -223,30 +223,30 @@ public class GlobalWarming implements Listener {
             carbonDioxideGenValuesF.createSection("minecraft:stripped_jungle_wood");
             carbonDioxideGenValuesF.createSection("minecraft:stripped_acacia_wood");
             carbonDioxideGenValuesF.createSection("minecraft:stripped_dark_oak_wood");
-            carbonDioxideGenValuesF.set("minecraft:oak_log", 1.5f * 2.0f);
-            carbonDioxideGenValuesF.set("minecraft:spruce_log", 1.5f * 2.0f);
-            carbonDioxideGenValuesF.set("minecraft:birch_log", 1.5f * 2.0f);
-            carbonDioxideGenValuesF.set("minecraft:jungle_log", 1.5f * 2.0f);
-            carbonDioxideGenValuesF.set("minecraft:acacia_log", 1.5f * 2.0f);
-            carbonDioxideGenValuesF.set("minecraft:dark_oak_log", 1.5f * 2.0f);
-            carbonDioxideGenValuesF.set("minecraft:stripped_oak_log", 1.5f * 1.8f);
-            carbonDioxideGenValuesF.set("minecraft:stripped_spruce_log", 1.5f * 1.8f);
-            carbonDioxideGenValuesF.set("minecraft:stripped_birch_log", 1.5f * 1.8f);
-            carbonDioxideGenValuesF.set("minecraft:stripped_jungle_log", 1.5f * 1.8f);
-            carbonDioxideGenValuesF.set("minecraft:stripped_acacia_log", 1.5f * 1.8f);
-            carbonDioxideGenValuesF.set("minecraft:stripped_dark_oak_log", 1.5f * 1.8f);
-            carbonDioxideGenValuesF.set("minecraft:oak_wood", 1.5f * 2.0f);
-            carbonDioxideGenValuesF.set("minecraft:spruce_wood", 1.5f * 2.0f);
-            carbonDioxideGenValuesF.set("minecraft:birch_wood", 1.5f * 2.0f);
-            carbonDioxideGenValuesF.set("minecraft:jungle_wood", 1.5f * 2.0f);
-            carbonDioxideGenValuesF.set("minecraft:acacia_wood", 1.5f * 2.0f);
-            carbonDioxideGenValuesF.set("minecraft:dark_oak_wood", 1.5f * 2.0f);
-            carbonDioxideGenValuesF.set("minecraft:stripped_oak_wood", 1.5f * 1.8f);
-            carbonDioxideGenValuesF.set("minecraft:stripped_spruce_wood", 1.5f * 1.8f);
-            carbonDioxideGenValuesF.set("minecraft:stripped_birch_wood", 1.5f * 1.8f);
-            carbonDioxideGenValuesF.set("minecraft:stripped_jungle_wood", 1.5f * 1.8f);
-            carbonDioxideGenValuesF.set("minecraft:stripped_acacia_wood", 1.5f * 1.8f);
-            carbonDioxideGenValuesF.set("minecraft:stripped_dark_oak_wood", 1.5f * 1.8f);
+            carbonDioxideGenValuesF.set("minecraft:oak_log", 1.5 * 2.0);
+            carbonDioxideGenValuesF.set("minecraft:spruce_log", 1.5 * 2.0);
+            carbonDioxideGenValuesF.set("minecraft:birch_log", 1.5 * 2.0);
+            carbonDioxideGenValuesF.set("minecraft:jungle_log", 1.5 * 2.0);
+            carbonDioxideGenValuesF.set("minecraft:acacia_log", 1.5 * 2.0);
+            carbonDioxideGenValuesF.set("minecraft:dark_oak_log", 1.5 * 2.0);
+            carbonDioxideGenValuesF.set("minecraft:stripped_oak_log", 1.5 * 1.8);
+            carbonDioxideGenValuesF.set("minecraft:stripped_spruce_log", 1.5 * 1.8);
+            carbonDioxideGenValuesF.set("minecraft:stripped_birch_log", 1.5 * 1.8);
+            carbonDioxideGenValuesF.set("minecraft:stripped_jungle_log", 1.5 * 1.8);
+            carbonDioxideGenValuesF.set("minecraft:stripped_acacia_log", 1.5 * 1.8);
+            carbonDioxideGenValuesF.set("minecraft:stripped_dark_oak_log", 1.5 * 1.8);
+            carbonDioxideGenValuesF.set("minecraft:oak_wood", 1.5 * 2.0);
+            carbonDioxideGenValuesF.set("minecraft:spruce_wood", 1.5 * 2.0);
+            carbonDioxideGenValuesF.set("minecraft:birch_wood", 1.5 * 2.0);
+            carbonDioxideGenValuesF.set("minecraft:jungle_wood", 1.5 * 2.0);
+            carbonDioxideGenValuesF.set("minecraft:acacia_wood", 1.5 * 2.0);
+            carbonDioxideGenValuesF.set("minecraft:dark_oak_wood", 1.5 * 2.0);
+            carbonDioxideGenValuesF.set("minecraft:stripped_oak_wood", 1.5 * 1.8);
+            carbonDioxideGenValuesF.set("minecraft:stripped_spruce_wood", 1.5 * 1.8);
+            carbonDioxideGenValuesF.set("minecraft:stripped_birch_wood", 1.5 * 1.8);
+            carbonDioxideGenValuesF.set("minecraft:stripped_jungle_wood", 1.5 * 1.8);
+            carbonDioxideGenValuesF.set("minecraft:stripped_acacia_wood", 1.5 * 1.8);
+            carbonDioxideGenValuesF.set("minecraft:stripped_dark_oak_wood", 1.5 * 1.8);
 
             carbonDioxideGenValuesF.createSection("minecraft:oak_planks");
             carbonDioxideGenValuesF.createSection("minecraft:spruce_planks");
@@ -254,12 +254,12 @@ public class GlobalWarming implements Listener {
             carbonDioxideGenValuesF.createSection("minecraft:jungle_planks");
             carbonDioxideGenValuesF.createSection("minecraft:acacia_planks");
             carbonDioxideGenValuesF.createSection("minecraft:dark_oak_planks");
-            carbonDioxideGenValuesF.set("minecraft:oak_planks", 1.5f * 1.8f);
-            carbonDioxideGenValuesF.set("minecraft:spruce_planks", 1.5f * 1.8f);
-            carbonDioxideGenValuesF.set("minecraft:birch_planks", 1.5f * 1.8f);
-            carbonDioxideGenValuesF.set("minecraft:jungle_planks", 1.5f * 1.8f);
-            carbonDioxideGenValuesF.set("minecraft:acacia_planks", 1.5f * 1.8f);
-            carbonDioxideGenValuesF.set("minecraft:dark_oak_planks", 1.5f * 1.8f);
+            carbonDioxideGenValuesF.set("minecraft:oak_planks", 1.5 * 1.8);
+            carbonDioxideGenValuesF.set("minecraft:spruce_planks", 1.5 * 1.8);
+            carbonDioxideGenValuesF.set("minecraft:birch_planks", 1.5 * 1.8);
+            carbonDioxideGenValuesF.set("minecraft:jungle_planks", 1.5 * 1.8);
+            carbonDioxideGenValuesF.set("minecraft:acacia_planks", 1.5 * 1.8);
+            carbonDioxideGenValuesF.set("minecraft:dark_oak_planks", 1.5 * 1.8);
 
             carbonDioxideGenValuesF.createSection("minecraft:oak_stairs");
             carbonDioxideGenValuesF.createSection("minecraft:spruce_stairs");
@@ -267,12 +267,12 @@ public class GlobalWarming implements Listener {
             carbonDioxideGenValuesF.createSection("minecraft:jungle_stairs");
             carbonDioxideGenValuesF.createSection("minecraft:acacia_stairs");
             carbonDioxideGenValuesF.createSection("minecraft:dark_oak_stairs");
-            carbonDioxideGenValuesF.set("minecraft:oak_stairs", 1.5f * 1.8f);
-            carbonDioxideGenValuesF.set("minecraft:spruce_stairs", 1.5f * 1.8f);
-            carbonDioxideGenValuesF.set("minecraft:birch_stairs", 1.5f * 1.8f);
-            carbonDioxideGenValuesF.set("minecraft:jungle_stairs", 1.5f * 1.8f);
-            carbonDioxideGenValuesF.set("minecraft:acacia_stairs", 1.5f * 1.8f);
-            carbonDioxideGenValuesF.set("minecraft:dark_oak_stairs", 1.5f * 1.8f);
+            carbonDioxideGenValuesF.set("minecraft:oak_stairs", 1.5 * 1.8);
+            carbonDioxideGenValuesF.set("minecraft:spruce_stairs", 1.5 * 1.8);
+            carbonDioxideGenValuesF.set("minecraft:birch_stairs", 1.5 * 1.8);
+            carbonDioxideGenValuesF.set("minecraft:jungle_stairs", 1.5 * 1.8);
+            carbonDioxideGenValuesF.set("minecraft:acacia_stairs", 1.5 * 1.8);
+            carbonDioxideGenValuesF.set("minecraft:dark_oak_stairs", 1.5 * 1.8);
 
             carbonDioxideGenValuesF.createSection("minecraft:oak_pressure_plate");
             carbonDioxideGenValuesF.createSection("minecraft:spruce_pressure_plate");
@@ -280,12 +280,12 @@ public class GlobalWarming implements Listener {
             carbonDioxideGenValuesF.createSection("minecraft:jungle_pressure_plate");
             carbonDioxideGenValuesF.createSection("minecraft:acacia_pressure_plate");
             carbonDioxideGenValuesF.createSection("minecraft:dark_oak_pressure_plate");
-            carbonDioxideGenValuesF.set("minecraft:oak_pressure_plate", 1.5f * 1.8f);
-            carbonDioxideGenValuesF.set("minecraft:spruce_pressure_plate", 1.5f * 1.8f);
-            carbonDioxideGenValuesF.set("minecraft:birch_pressure_plate", 1.5f * 1.8f);
-            carbonDioxideGenValuesF.set("minecraft:jungle_pressure_plate", 1.5f * 1.8f);
-            carbonDioxideGenValuesF.set("minecraft:acacia_pressure_plate", 1.5f * 1.8f);
-            carbonDioxideGenValuesF.set("minecraft:dark_oak_pressure_plate", 1.5f * 1.8f);
+            carbonDioxideGenValuesF.set("minecraft:oak_pressure_plate", 1.5 * 1.8);
+            carbonDioxideGenValuesF.set("minecraft:spruce_pressure_plate", 1.5 * 1.8);
+            carbonDioxideGenValuesF.set("minecraft:birch_pressure_plate", 1.5 * 1.8);
+            carbonDioxideGenValuesF.set("minecraft:jungle_pressure_plate", 1.5 * 1.8);
+            carbonDioxideGenValuesF.set("minecraft:acacia_pressure_plate", 1.5 * 1.8);
+            carbonDioxideGenValuesF.set("minecraft:dark_oak_pressure_plate", 1.5 * 1.8);
 
             carbonDioxideGenValuesF.createSection("minecraft:oak_trapdoor");
             carbonDioxideGenValuesF.createSection("minecraft:spruce_trapdoor");
@@ -293,12 +293,12 @@ public class GlobalWarming implements Listener {
             carbonDioxideGenValuesF.createSection("minecraft:jungle_trapdoor");
             carbonDioxideGenValuesF.createSection("minecraft:acacia_trapdoor");
             carbonDioxideGenValuesF.createSection("minecraft:dark_oak_trapdoor");
-            carbonDioxideGenValuesF.set("minecraft:oak_trapdoor", 1.5f * 1.8f);
-            carbonDioxideGenValuesF.set("minecraft:spruce_trapdoor", 1.5f * 1.8f);
-            carbonDioxideGenValuesF.set("minecraft:birch_trapdoor", 1.5f * 1.8f);
-            carbonDioxideGenValuesF.set("minecraft:jungle_trapdoor", 1.5f * 1.8f);
-            carbonDioxideGenValuesF.set("minecraft:acacia_trapdoor", 1.5f * 1.8f);
-            carbonDioxideGenValuesF.set("minecraft:dark_oak_trapdoor", 1.5f * 1.8f);
+            carbonDioxideGenValuesF.set("minecraft:oak_trapdoor", 1.5 * 1.8);
+            carbonDioxideGenValuesF.set("minecraft:spruce_trapdoor", 1.5 * 1.8);
+            carbonDioxideGenValuesF.set("minecraft:birch_trapdoor", 1.5 * 1.8);
+            carbonDioxideGenValuesF.set("minecraft:jungle_trapdoor", 1.5 * 1.8);
+            carbonDioxideGenValuesF.set("minecraft:acacia_trapdoor", 1.5 * 1.8);
+            carbonDioxideGenValuesF.set("minecraft:dark_oak_trapdoor", 1.5 * 1.8);
 
             carbonDioxideGenValuesF.createSection("minecraft:oak_fence_gate");
             carbonDioxideGenValuesF.createSection("minecraft:spruce_fence_gate");
@@ -306,12 +306,12 @@ public class GlobalWarming implements Listener {
             carbonDioxideGenValuesF.createSection("minecraft:jungle_fence_gate");
             carbonDioxideGenValuesF.createSection("minecraft:acacia_fence_gate");
             carbonDioxideGenValuesF.createSection("minecraft:dark_oak_fence_gate");
-            carbonDioxideGenValuesF.set("minecraft:oak_fence_gate", 1.5f * 1.8f);
-            carbonDioxideGenValuesF.set("minecraft:spruce_fence_gate", 1.5f * 1.8f);
-            carbonDioxideGenValuesF.set("minecraft:birch_fence_gate", 1.5f * 1.8f);
-            carbonDioxideGenValuesF.set("minecraft:jungle_fence_gate", 1.5f * 1.8f);
-            carbonDioxideGenValuesF.set("minecraft:acacia_fence_gate", 1.5f * 1.8f);
-            carbonDioxideGenValuesF.set("minecraft:dark_oak_fence_gate", 1.5f * 1.8f);
+            carbonDioxideGenValuesF.set("minecraft:oak_fence_gate", 1.5 * 1.8);
+            carbonDioxideGenValuesF.set("minecraft:spruce_fence_gate", 1.5 * 1.8);
+            carbonDioxideGenValuesF.set("minecraft:birch_fence_gate", 1.5 * 1.8);
+            carbonDioxideGenValuesF.set("minecraft:jungle_fence_gate", 1.5 * 1.8);
+            carbonDioxideGenValuesF.set("minecraft:acacia_fence_gate", 1.5 * 1.8);
+            carbonDioxideGenValuesF.set("minecraft:dark_oak_fence_gate", 1.5 * 1.8);
 
             carbonDioxideGenValuesF.createSection("minecraft:oak_fence");
             carbonDioxideGenValuesF.createSection("minecraft:spruce_fence");
@@ -319,57 +319,57 @@ public class GlobalWarming implements Listener {
             carbonDioxideGenValuesF.createSection("minecraft:jungle_fence");
             carbonDioxideGenValuesF.createSection("minecraft:acacia_fence");
             carbonDioxideGenValuesF.createSection("minecraft:dark_oak_fence");
-            carbonDioxideGenValuesF.set("minecraft:oak_fence", 1.5f * 1.8f);
-            carbonDioxideGenValuesF.set("minecraft:spruce_fence", 1.5f * 1.8f);
-            carbonDioxideGenValuesF.set("minecraft:birch_fence", 1.5f * 1.8f);
-            carbonDioxideGenValuesF.set("minecraft:jungle_fence", 1.5f * 1.8f);
-            carbonDioxideGenValuesF.set("minecraft:acacia_fence", 1.5f * 1.8f);
-            carbonDioxideGenValuesF.set("minecraft:dark_oak_fence", 1.5f * 1.8f);
+            carbonDioxideGenValuesF.set("minecraft:oak_fence", 1.5 * 1.8);
+            carbonDioxideGenValuesF.set("minecraft:spruce_fence", 1.5 * 1.8);
+            carbonDioxideGenValuesF.set("minecraft:birch_fence", 1.5 * 1.8);
+            carbonDioxideGenValuesF.set("minecraft:jungle_fence", 1.5 * 1.8);
+            carbonDioxideGenValuesF.set("minecraft:acacia_fence", 1.5 * 1.8);
+            carbonDioxideGenValuesF.set("minecraft:dark_oak_fence", 1.5 * 1.8);
 
             carbonDioxideGenValuesF.createSection("minecraft:ladder");
-            carbonDioxideGenValuesF.set("minecraft:ladder", 1.5f * 1.8f);
+            carbonDioxideGenValuesF.set("minecraft:ladder", 1.5 * 1.8);
 
             carbonDioxideGenValuesF.createSection("minecraft:crafting_table");
-            carbonDioxideGenValuesF.set("minecraft:crafting_table", 1.5f * 1.8f);
+            carbonDioxideGenValuesF.set("minecraft:crafting_table", 1.5 * 1.8);
 
             carbonDioxideGenValuesF.createSection("minecraft:cartography_table");
-            carbonDioxideGenValuesF.set("minecraft:cartography_table", 1.5f * 1.8f);
+            carbonDioxideGenValuesF.set("minecraft:cartography_table", 1.5 * 1.8);
 
             carbonDioxideGenValuesF.createSection("minecraft:fletching_table");
-            carbonDioxideGenValuesF.set("minecraft:fletching_table", 1.5f * 1.8f);
+            carbonDioxideGenValuesF.set("minecraft:fletching_table", 1.5 * 1.8);
 
             carbonDioxideGenValuesF.createSection("minecraft:smithing_table");
-            carbonDioxideGenValuesF.set("minecraft:smithing_table", 1.5f * 1.8f);
+            carbonDioxideGenValuesF.set("minecraft:smithing_table", 1.5 * 1.8);
 
             carbonDioxideGenValuesF.createSection("minecraft:loom");
-            carbonDioxideGenValuesF.set("minecraft:loom", 1.5f * 1.8f);
+            carbonDioxideGenValuesF.set("minecraft:loom", 1.5 * 1.8);
 
             carbonDioxideGenValuesF.createSection("minecraft:bookshelf");
-            carbonDioxideGenValuesF.set("minecraft:bookshelf", 1.5f * 1.8f);
+            carbonDioxideGenValuesF.set("minecraft:bookshelf", 1.5 * 1.8);
 
             carbonDioxideGenValuesF.createSection("minecraft:lectern");
-            carbonDioxideGenValuesF.set("minecraft:lectern", 1.5f * 1.8f);
+            carbonDioxideGenValuesF.set("minecraft:lectern", 1.5 * 1.8);
 
             carbonDioxideGenValuesF.createSection("minecraft:composter");
-            carbonDioxideGenValuesF.set("minecraft:composter", 1.5f * 1.8f);
+            carbonDioxideGenValuesF.set("minecraft:composter", 1.5 * 1.8);
 
             carbonDioxideGenValuesF.createSection("minecraft:chest");
-            carbonDioxideGenValuesF.set("minecraft:chest", 1.5f * 1.8f);
+            carbonDioxideGenValuesF.set("minecraft:chest", 1.5 * 1.8);
 
             carbonDioxideGenValuesF.createSection("minecraft:trapped_chest");
-            carbonDioxideGenValuesF.set("minecraft:trapped_chest", 1.5f * 1.8f);
+            carbonDioxideGenValuesF.set("minecraft:trapped_chest", 1.5 * 1.8);
 
             carbonDioxideGenValuesF.createSection("minecraft:barrel");
-            carbonDioxideGenValuesF.set("minecraft:barrel", 1.5f * 1.8f);
+            carbonDioxideGenValuesF.set("minecraft:barrel", 1.5 * 1.8);
 
             carbonDioxideGenValuesF.createSection("minecraft:daylight_detector");
-            carbonDioxideGenValuesF.set("minecraft:daylight_detector", 1.5f * 4.0f);
+            carbonDioxideGenValuesF.set("minecraft:daylight_detector", 1.5 * 4.0);
 
             carbonDioxideGenValuesF.createSection("minecraft:jukebox");
-            carbonDioxideGenValuesF.set("minecraft:jukebox", 1.5f * 4.0f);
+            carbonDioxideGenValuesF.set("minecraft:jukebox", 1.5 * 4.0);
 
             carbonDioxideGenValuesF.createSection("minecraft:note_block");
-            carbonDioxideGenValuesF.set("minecraft:note_block", 1.5f * 4.0f);
+            carbonDioxideGenValuesF.set("minecraft:note_block", 1.5 * 4.0);
 
             carbonDioxideGenValuesF.createSection("minecraft:white_banner");
             carbonDioxideGenValuesF.createSection("minecraft:orange_banner");
@@ -387,28 +387,28 @@ public class GlobalWarming implements Listener {
             carbonDioxideGenValuesF.createSection("minecraft:green_banner");
             carbonDioxideGenValuesF.createSection("minecraft:red_banner");
             carbonDioxideGenValuesF.createSection("minecraft:black_banner");
-            carbonDioxideGenValuesF.set("minecraft:white_banner", 1.5f * 2.4f);
-            carbonDioxideGenValuesF.set("minecraft:orange_banner", 1.5f * 2.4f);
-            carbonDioxideGenValuesF.set("minecraft:magenta_banner", 1.5f * 2.4f);
-            carbonDioxideGenValuesF.set("minecraft:light_blue_banner", 1.5f * 2.4f);
-            carbonDioxideGenValuesF.set("minecraft:yellow_banner", 1.5f * 2.4f);
-            carbonDioxideGenValuesF.set("minecraft:lime_banner", 1.5f * 2.4f);
-            carbonDioxideGenValuesF.set("minecraft:pink_banner", 1.5f * 2.4f);
-            carbonDioxideGenValuesF.set("minecraft:gray_banner", 1.5f * 2.4f);
-            carbonDioxideGenValuesF.set("minecraft:light_gray_banner", 1.5f * 2.4f);
-            carbonDioxideGenValuesF.set("minecraft:cyan_banner", 1.5f * 2.4f);
-            carbonDioxideGenValuesF.set("minecraft:purple_banner", 1.5f * 2.4f);
-            carbonDioxideGenValuesF.set("minecraft:blue_banner", 1.5f * 2.4f);
-            carbonDioxideGenValuesF.set("minecraft:brown_banner", 1.5f * 2.4f);
-            carbonDioxideGenValuesF.set("minecraft:green_banner", 1.5f * 2.4f);
-            carbonDioxideGenValuesF.set("minecraft:red_banner", 1.5f * 2.4f);
-            carbonDioxideGenValuesF.set("minecraft:black_banner", 1.5f * 2.4f);
+            carbonDioxideGenValuesF.set("minecraft:white_banner", 1.5 * 2.4);
+            carbonDioxideGenValuesF.set("minecraft:orange_banner", 1.5 * 2.4);
+            carbonDioxideGenValuesF.set("minecraft:magenta_banner", 1.5 * 2.4);
+            carbonDioxideGenValuesF.set("minecraft:light_blue_banner", 1.5 * 2.4);
+            carbonDioxideGenValuesF.set("minecraft:yellow_banner", 1.5 * 2.4);
+            carbonDioxideGenValuesF.set("minecraft:lime_banner", 1.5 * 2.4);
+            carbonDioxideGenValuesF.set("minecraft:pink_banner", 1.5 * 2.4);
+            carbonDioxideGenValuesF.set("minecraft:gray_banner", 1.5 * 2.4);
+            carbonDioxideGenValuesF.set("minecraft:light_gray_banner", 1.5 * 2.4);
+            carbonDioxideGenValuesF.set("minecraft:cyan_banner", 1.5 * 2.4);
+            carbonDioxideGenValuesF.set("minecraft:purple_banner", 1.5 * 2.4);
+            carbonDioxideGenValuesF.set("minecraft:blue_banner", 1.5 * 2.4);
+            carbonDioxideGenValuesF.set("minecraft:brown_banner", 1.5 * 2.4);
+            carbonDioxideGenValuesF.set("minecraft:green_banner", 1.5 * 2.4);
+            carbonDioxideGenValuesF.set("minecraft:red_banner", 1.5 * 2.4);
+            carbonDioxideGenValuesF.set("minecraft:black_banner", 1.5 * 2.4);
 
             carbonDioxideGenValuesF.createSection("minecraft:fishing_rod");
-            carbonDioxideGenValuesF.set("minecraft:fishing_rod", 1.5f * 1.8f);
+            carbonDioxideGenValuesF.set("minecraft:fishing_rod", 1.5 * 1.8);
 
             carbonDioxideGenValuesF.createSection("minecraft:scaffolding");
-            carbonDioxideGenValuesF.set("minecraft:scaffolding", 2.0f * 1.5f);
+            carbonDioxideGenValuesF.set("minecraft:scaffolding", 2.0 * 1.5);
 
             carbonDioxideGenValuesF.createSection("minecraft:oak_boat");
             carbonDioxideGenValuesF.createSection("minecraft:spruce_boat");
@@ -416,30 +416,30 @@ public class GlobalWarming implements Listener {
             carbonDioxideGenValuesF.createSection("minecraft:jungle_boat");
             carbonDioxideGenValuesF.createSection("minecraft:acacia_boat");
             carbonDioxideGenValuesF.createSection("minecraft:dark_oak_boat");
-            carbonDioxideGenValuesF.set("minecraft:oak_boat", 6.0f * 1.8f);
-            carbonDioxideGenValuesF.set("minecraft:spruce_boat", 6.0f * 1.8f);
-            carbonDioxideGenValuesF.set("minecraft:birch_boat", 6.0f * 1.8f);
-            carbonDioxideGenValuesF.set("minecraft:jungle_boat", 6.0f * 1.8f);
-            carbonDioxideGenValuesF.set("minecraft:acacia_boat", 6.0f * 1.8f);
-            carbonDioxideGenValuesF.set("minecraft:dark_oak_boat", 6.0f * 1.8f);
+            carbonDioxideGenValuesF.set("minecraft:oak_boat", 6.0 * 1.8);
+            carbonDioxideGenValuesF.set("minecraft:spruce_boat", 6.0 * 1.8);
+            carbonDioxideGenValuesF.set("minecraft:birch_boat", 6.0 * 1.8);
+            carbonDioxideGenValuesF.set("minecraft:jungle_boat", 6.0 * 1.8);
+            carbonDioxideGenValuesF.set("minecraft:acacia_boat", 6.0 * 1.8);
+            carbonDioxideGenValuesF.set("minecraft:dark_oak_boat", 6.0 * 1.8);
 
             carbonDioxideGenValuesF.createSection("minecraft:charcoal");
-            carbonDioxideGenValuesF.set("minecraft:charcoal", 8.0f * 1.2f);
+            carbonDioxideGenValuesF.set("minecraft:charcoal", 8.0 * 1.2);
 
             carbonDioxideGenValuesF.createSection("minecraft:coal");
-            carbonDioxideGenValuesF.set("minecraft:coal", 8.0f * 1.0f);
+            carbonDioxideGenValuesF.set("minecraft:coal", 8.0 * 1.0);
 
             carbonDioxideGenValuesF.createSection("minecraft:blaze_rod");
-            carbonDioxideGenValuesF.set("minecraft:blaze_rod", 12.0f * 0.4f);
+            carbonDioxideGenValuesF.set("minecraft:blaze_rod", 12.0 * 0.4);
 
             carbonDioxideGenValuesF.createSection("minecraft:dried_kelp_block");
-            carbonDioxideGenValuesF.set("minecraft:dried_kelp_block", 20.0f * 0.75f);
+            carbonDioxideGenValuesF.set("minecraft:dried_kelp_block", 20.0 * 0.75);
 
             carbonDioxideGenValuesF.createSection("minecraft:coal_block");
-            carbonDioxideGenValuesF.set("minecraft:coal_block", 80.0f * 0.9f);
+            carbonDioxideGenValuesF.set("minecraft:coal_block", 80.0 * 0.9);
 
             carbonDioxideGenValuesF.createSection("minecraft:lava_bucket");
-            carbonDioxideGenValuesF.set("minecraft:lava_bucket", 100.0f * 0.4f);
+            carbonDioxideGenValuesF.set("minecraft:lava_bucket", 100.0 * 0.4);
 
             try {
                 carbonDioxideGenValuesF.save(carbonDioxideGenValuesFR);
@@ -449,15 +449,25 @@ public class GlobalWarming implements Listener {
             }
         }
 
-        carbonDioxideConcentration = 0;
-        methaneConcentration = 0;
-        nitrousOxideConcentration = 0;
-        waterVaporConcentration = 0;
-
         File carbonDioxideValueF = new File("plugins/EnvironmentalMechanics/globalwarming/carbondioxide.txt");
-        PluginDataInterpreter.write(carbonDioxideValueF, carbonDioxideConcentration);
 
-        PluginDataInterpreter.genFloatMapFromConfig(carbonDioxideGenValuesF, carbonDioxideGenValues);
+        if (!carbonDioxideValueF.exists()) {
+            carbonDioxideConcentration = 0;
+            methaneConcentration = 0;
+            nitrousOxideConcentration = 0;
+            waterVaporConcentration = 0;
+
+            PluginDataInterpreter.write(carbonDioxideValueF, carbonDioxideConcentration);
+            PluginDataInterpreter.genDoubleMapFromConfig(carbonDioxideGenValuesF, carbonDioxideGenValues);
+        }
+        else {
+            carbonDioxideConcentration = Integer.parseInt(PluginDataInterpreter.read(carbonDioxideValueF));
+            methaneConcentration = 0.0;
+            nitrousOxideConcentration = 0.0;
+            waterVaporConcentration = 0.0;
+
+            PluginDataInterpreter.genDoubleMapFromConfig(carbonDioxideGenValuesF, carbonDioxideGenValues);
+        }
     }
 
     @EventHandler
