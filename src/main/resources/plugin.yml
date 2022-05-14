@@ -6,3 +6,8 @@ prefix: EnvMechanics
 authors: [ ProPane865 ]
 description: A plugin for environmental mechanics in Mercator 2.
 website: mercatorearth.netlify.app
+
+commands:
+  getco2:
+    usage: /getco2
+    description: Displays the current carbon dioxide level in the server.
