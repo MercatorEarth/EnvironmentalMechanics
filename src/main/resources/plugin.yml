@@ -17,3 +17,6 @@ commands:
   getn2o:
     usage: /getn2o
     description: Displays the current nitrous oxide level in the server.
+  temperature:
+    usage: /temperature
+    description: Displays the current global temperature in the server

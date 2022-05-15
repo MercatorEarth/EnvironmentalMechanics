@@ -37,14 +37,14 @@ public class MethaneEvent implements Listener {
             methaneGenValuesF.createSection("PIG");
             methaneGenValuesF.createSection("minecraft:stone");
             methaneGenValuesF.createSection("minecraft:coal_ore");
-            methaneGenValuesF.set("CHICKEN", 1.0);
-            methaneGenValuesF.set("COW", 3.0);
-            methaneGenValuesF.set("SHEEP", 2.0);
-            methaneGenValuesF.set("MOOSHROOM", 3.5);
-            methaneGenValuesF.set("RABBIT", 1.0);
-            methaneGenValuesF.set("PIG", 2.5);
-            methaneGenValuesF.set("minecraft:coal_ore", 1.0);
-            methaneGenValuesF.set("minecraft:stone", 0.02);
+            methaneGenValuesF.set("CHICKEN", 0.5);
+            methaneGenValuesF.set("COW", 1.5);
+            methaneGenValuesF.set("SHEEP", 1.0);
+            methaneGenValuesF.set("MOOSHROOM", 1.75);
+            methaneGenValuesF.set("RABBIT", 0.5);
+            methaneGenValuesF.set("PIG", 1.25);
+            methaneGenValuesF.set("minecraft:coal_ore", 0.5);
+            methaneGenValuesF.set("minecraft:stone", 0.01);
 
             try {
                 methaneGenValuesF.save(methaneGenValuesFR);

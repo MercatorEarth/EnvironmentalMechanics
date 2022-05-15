@@ -32,7 +32,7 @@ public class NitrousOxideEvent implements Listener {
 
     @EventHandler
     public void onPlayerFertilizeBlock(BlockFertilizeEvent event) {
-        nitrousOxideConcentration += 2.0;
+        nitrousOxideConcentration += 0.25;
 
         File nitrousOxideValueF = new File("plugins/EnvironmentalMechanics/globalwarming/nitrousoxide.txt");
         PluginDataInterpreter.write(nitrousOxideValueF, nitrousOxideConcentration);
@@ -41,18 +41,21 @@ public class NitrousOxideEvent implements Listener {
     @EventHandler
     public void onPlayerFinishComposting (PlayerInteractEvent event) {
         Block blockInteracted = event.getClickedBlock();
-        String blockName = blockInteracted.getType().getKey().toString();
 
-        if (blockName.equals("minecraft:composter")) {
-            Levelled levelled = (Levelled) blockInteracted.getBlockData();
-            Integer level = levelled.getLevel();
+        if (!blockInteracted.equals(null)) {
+            String blockName = blockInteracted.getType().getKey().toString();
 
-            if (level == 8) {
-                nitrousOxideConcentration += 5.0;
+            if (blockName.equals("minecraft:composter")) {
+                Levelled levelled = (Levelled) blockInteracted.getBlockData();
+                Integer level = levelled.getLevel();
+
+                if (level == 8) {
+                    nitrousOxideConcentration += 1.0;
+
+                    File nitrousOxideValueF = new File("plugins/EnvironmentalMechanics/globalwarming/nitrousoxide.txt");
+                    PluginDataInterpreter.write(nitrousOxideValueF, nitrousOxideConcentration);
+                }
             }
         }
-
-        File nitrousOxideValueF = new File("plugins/EnvironmentalMechanics/globalwarming/nitrousoxide.txt");
-        PluginDataInterpreter.write(nitrousOxideValueF, nitrousOxideConcentration);
     }
 }
