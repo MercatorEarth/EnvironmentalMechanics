@@ -12,26 +12,16 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class GlobalWarming implements Listener {
+public class CarbonDioxideEvent implements Listener {
 
     public double carbonDioxideConcentration;
-    public double methaneConcentration;
-    public double nitrousOxideConcentration;
-    public double waterVaporConcentration;
-
     private Map<String, Double> carbonDioxideGenValues;
-    private Map<String, Double> methaneGenValues;
-    private Map<String, Double> nitrousOxideGenValues;
-    private Map<String, Double> waterVaporGenValues;
 
     private File carbonDioxideGenValuesFR;
     private YamlConfiguration carbonDioxideGenValuesF;
 
-    public GlobalWarming() {
+    public CarbonDioxideEvent() {
         carbonDioxideGenValues = new HashMap<>();
-        methaneGenValues = new HashMap<>();
-        nitrousOxideGenValues = new HashMap<>();
-        waterVaporGenValues = new HashMap<>();
 
         carbonDioxideGenValuesFR = new File("plugins/EnvironmentalMechanics/globalwarming/carbondioxidegenvalues.yml");
         carbonDioxideGenValuesF = YamlConfiguration.loadConfiguration(carbonDioxideGenValuesFR);
@@ -453,21 +443,14 @@ public class GlobalWarming implements Listener {
 
         if (!carbonDioxideValueF.exists()) {
             carbonDioxideConcentration = 0;
-            methaneConcentration = 0;
-            nitrousOxideConcentration = 0;
-            waterVaporConcentration = 0;
 
             PluginDataInterpreter.write(carbonDioxideValueF, carbonDioxideConcentration);
-            PluginDataInterpreter.genDoubleMapFromConfig(carbonDioxideGenValuesF, carbonDioxideGenValues);
         }
         else {
-            carbonDioxideConcentration = Integer.parseInt(PluginDataInterpreter.read(carbonDioxideValueF));
-            methaneConcentration = 0.0;
-            nitrousOxideConcentration = 0.0;
-            waterVaporConcentration = 0.0;
-
-            PluginDataInterpreter.genDoubleMapFromConfig(carbonDioxideGenValuesF, carbonDioxideGenValues);
+            carbonDioxideConcentration = Double.parseDouble(PluginDataInterpreter.read(carbonDioxideValueF));
         }
+
+        PluginDataInterpreter.genDoubleMapFromConfig(carbonDioxideGenValuesF, carbonDioxideGenValues);
     }
 
     @EventHandler

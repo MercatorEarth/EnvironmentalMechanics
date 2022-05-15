@@ -9,7 +9,7 @@ import org.bukkit.entity.Player;
 
 import java.io.File;
 
-public class CommandGetCarbonDioxide implements CommandExecutor {
+public class CommandGetMethane implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -17,10 +17,10 @@ public class CommandGetCarbonDioxide implements CommandExecutor {
         boolean triggered = false;
 
         try {
-            File carbonDioxideValueF = new File("plugins/EnvironmentalMechanics/globalwarming/carbondioxide.txt");
-            Double carbonDioxideValue = Double.parseDouble(PluginDataInterpreter.read(carbonDioxideValueF));
+            File methaneValueF = new File("plugins/EnvironmentalMechanics/globalwarming/methane.txt");
+            Double methaneValue = Double.parseDouble(PluginDataInterpreter.read(methaneValueF));
 
-            sender.sendMessage(ChatColor.YELLOW + "The current carbon dioxide level is " + Math.round(carbonDioxideValue) + ".");
+            sender.sendMessage(ChatColor.YELLOW + "The current methane level is " + Math.round(methaneValue) + ".");
 
             triggered = true;
         }
