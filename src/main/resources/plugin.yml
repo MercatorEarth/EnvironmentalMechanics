@@ -14,3 +14,6 @@ commands:
   getch4:
     usage: /getch4
     description: Displays the current methane level in the server.
+  getn2o:
+    usage: /getn2o
+    description: Displays the current nitrous oxide level in the server.

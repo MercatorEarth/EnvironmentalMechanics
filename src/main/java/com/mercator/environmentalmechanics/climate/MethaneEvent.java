@@ -83,12 +83,12 @@ public class MethaneEvent implements Listener {
     @EventHandler
     public void onPlayerMineBlock(BlockBreakEvent event) {
         Block blockBroken = event.getBlock();
-        String blockName = blockBroken.toString();
+        String blockName = blockBroken.getType().getKey().toString();
 
         if (methaneGenValues.containsKey(blockName)) {
             methaneConcentration += methaneGenValues.get(blockName);
 
-            File methaneConcentrationF = new File("plugins/EnvironmentalMechanics/methane.txt");
+            File methaneConcentrationF = new File("plugins/EnvironmentalMechanics/globalwarming/methane.txt");
             PluginDataInterpreter.write(methaneConcentrationF, methaneConcentration);
         }
     }
