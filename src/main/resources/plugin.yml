@@ -11,3 +11,6 @@ commands:
   getco2:
     usage: /getco2
     description: Displays the current carbon dioxide level in the server.
+  getch4:
+    usage: /getch4
+    description: Displays the current methane level in the server.
