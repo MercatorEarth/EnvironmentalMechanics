@@ -1,4 +1,4 @@
-package com.mercator.environmentalmechanics.climate;
+package com.mercator.environmentalmechanics.greenhouseengine;
 
 import com.mercator.environmentalmechanics.PluginDataInterpreter;
 import org.bukkit.configuration.file.YamlConfiguration;

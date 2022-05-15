@@ -1,12 +1,12 @@
 package com.mercator.environmentalmechanics;
 
-import com.mercator.environmentalmechanics.climate.CarbonDioxideEvent;
-import com.mercator.environmentalmechanics.climate.MethaneEvent;
-import com.mercator.environmentalmechanics.climate.NitrousOxideEvent;
-import com.mercator.environmentalmechanics.climate.commands.CommandGetCarbonDioxide;
-import com.mercator.environmentalmechanics.climate.commands.CommandGetMethane;
-import com.mercator.environmentalmechanics.climate.commands.CommandGetNitrousOxide;
-import com.mercator.environmentalmechanics.climate.commands.CommandTemperature;
+import com.mercator.environmentalmechanics.greenhouseengine.CarbonDioxideEvent;
+import com.mercator.environmentalmechanics.greenhouseengine.MethaneEvent;
+import com.mercator.environmentalmechanics.greenhouseengine.NitrousOxideEvent;
+import com.mercator.environmentalmechanics.commands.CommandGetCarbonDioxide;
+import com.mercator.environmentalmechanics.commands.CommandGetMethane;
+import com.mercator.environmentalmechanics.commands.CommandGetNitrousOxide;
+import com.mercator.environmentalmechanics.commands.CommandTemperature;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class EnvironmentalMechanics extends JavaPlugin {

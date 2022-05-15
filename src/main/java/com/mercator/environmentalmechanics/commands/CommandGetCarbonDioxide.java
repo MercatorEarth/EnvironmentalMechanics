@@ -1,4 +1,4 @@
-package com.mercator.environmentalmechanics.climate.commands;
+package com.mercator.environmentalmechanics.commands;
 
 import com.mercator.environmentalmechanics.PluginDataInterpreter;
 import org.bukkit.ChatColor;
@@ -9,7 +9,7 @@ import org.bukkit.entity.Player;
 
 import java.io.File;
 
-public class CommandGetMethane implements CommandExecutor {
+public class CommandGetCarbonDioxide implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -17,10 +17,10 @@ public class CommandGetMethane implements CommandExecutor {
         boolean triggered = false;
 
         try {
-            File methaneValueF = new File("plugins/EnvironmentalMechanics/globalwarming/methane.txt");
-            Double methaneValue = Double.parseDouble(PluginDataInterpreter.read(methaneValueF));
+            File carbonDioxideValueF = new File("plugins/EnvironmentalMechanics/globalwarming/carbondioxide.txt");
+            Double carbonDioxideValue = Double.parseDouble(PluginDataInterpreter.read(carbonDioxideValueF));
 
-            sender.sendMessage(ChatColor.YELLOW + "The current methane level is " + Math.round(methaneValue) + ".");
+            sender.sendMessage(ChatColor.YELLOW + "The current carbon dioxide level is " + Math.round(carbonDioxideValue) + ".");
 
             triggered = true;
         }

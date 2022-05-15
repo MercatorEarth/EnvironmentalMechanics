@@ -1,8 +1,6 @@
-package com.mercator.environmentalmechanics.climate.commands;
+package com.mercator.environmentalmechanics.commands;
 
 import com.mercator.environmentalmechanics.PluginDataInterpreter;
-import com.mercator.environmentalmechanics.climate.WarmingEffects;
-import org.apache.commons.math3.util.Precision;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -11,7 +9,7 @@ import org.bukkit.entity.Player;
 
 import java.io.File;
 
-public class CommandTemperature implements CommandExecutor {
+public class CommandGetMethane implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -19,8 +17,11 @@ public class CommandTemperature implements CommandExecutor {
         boolean triggered = false;
 
         try {
-            double temperature = WarmingEffects.getTemperature();
-            sender.sendMessage(ChatColor.YELLOW + "The current temperature is " + Precision.round(temperature, 2) + ".");
+            File methaneValueF = new File("plugins/EnvironmentalMechanics/globalwarming/methane.txt");
+            Double methaneValue = Double.parseDouble(PluginDataInterpreter.read(methaneValueF));
+
+            sender.sendMessage(ChatColor.YELLOW + "The current methane level is " + Math.round(methaneValue) + ".");
+
             triggered = true;
         }
         catch (Exception e) {
