@@ -64,12 +64,13 @@ public class MethaneEvent implements Listener {
         else {
             methaneConcentration = Double.parseDouble(PluginDataInterpreter.read(methaneValueF));
         }
+
+        PluginDataInterpreter.genDoubleMapFromConfig(methaneGenValuesF, methaneGenValues);
     }
 
     @EventHandler
     public void onDeathOfEntity(EntityDeathEvent event) {
-        Entity entity = event.getEntity();
-        String entityName = entity.getName();
+        String entityName = event.getEntityType().toString();
 
         if (methaneGenValues.containsKey(entityName)) {
             methaneConcentration += methaneGenValues.get(entityName);
