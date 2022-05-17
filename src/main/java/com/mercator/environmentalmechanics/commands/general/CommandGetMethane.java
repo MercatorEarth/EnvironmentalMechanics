@@ -1,4 +1,4 @@
-package com.mercator.environmentalmechanics.commands;
+package com.mercator.environmentalmechanics.commands.general;
 
 import com.mercator.environmentalmechanics.PluginDataInterpreter;
 import org.bukkit.ChatColor;
@@ -9,7 +9,7 @@ import org.bukkit.entity.Player;
 
 import java.io.File;
 
-public class CommandSetNitrousOxide implements CommandExecutor {
+public class CommandGetMethane implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -17,16 +17,18 @@ public class CommandSetNitrousOxide implements CommandExecutor {
         boolean triggered = false;
 
         try {
-            File nitrousOxideValueF = new File("plugins/EnvironmentalMechanics/globalwarming/nitrousoxide.txt");
-            PluginDataInterpreter.write(nitrousOxideValueF, Double.parseDouble(args[0]));
+            File methaneValueF = new File("plugins/EnvironmentalMechanics/globalwarming/methane.txt");
+            Double methaneValue = Double.parseDouble(PluginDataInterpreter.read(methaneValueF));
 
-            sender.sendMessage(ChatColor.GREEN + "Successfully changed the nitrous oxide level to "+args[0]+"!");
+            sender.sendMessage(ChatColor.YELLOW + "The current methane level is " + Math.round(methaneValue) + ".");
 
             triggered = true;
         }
         catch (Exception e) {
-            sender.sendMessage(ChatColor.RED + "Error processing the command! Either the syntax is incorrect, or something went wrong internally!");
             e.printStackTrace();
+            sender.sendMessage(ChatColor.RED + "An internal error has occurred!");
+
+            triggered = false;
         }
 
         return triggered;

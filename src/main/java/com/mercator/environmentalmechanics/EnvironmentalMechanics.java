@@ -1,6 +1,12 @@
 package com.mercator.environmentalmechanics;
 
-import com.mercator.environmentalmechanics.commands.*;
+import com.mercator.environmentalmechanics.commands.admin.CommandSetCarbonDioxide;
+import com.mercator.environmentalmechanics.commands.admin.CommandSetMethane;
+import com.mercator.environmentalmechanics.commands.admin.CommandSetNitrousOxide;
+import com.mercator.environmentalmechanics.commands.general.CommandGetCarbonDioxide;
+import com.mercator.environmentalmechanics.commands.general.CommandGetMethane;
+import com.mercator.environmentalmechanics.commands.general.CommandGetNitrousOxide;
+import com.mercator.environmentalmechanics.commands.general.CommandTemperature;
 import com.mercator.environmentalmechanics.greenhouseengine.CarbonDioxideEvent;
 import com.mercator.environmentalmechanics.greenhouseengine.MethaneEvent;
 import com.mercator.environmentalmechanics.greenhouseengine.NitrousOxideEvent;

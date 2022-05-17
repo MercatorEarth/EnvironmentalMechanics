@@ -1,4 +1,4 @@
-package com.mercator.environmentalmechanics.commands;
+package com.mercator.environmentalmechanics.commands.admin;
 
 import com.mercator.environmentalmechanics.PluginDataInterpreter;
 import org.bukkit.ChatColor;
@@ -9,7 +9,7 @@ import org.bukkit.entity.Player;
 
 import java.io.File;
 
-public class CommandSetMethane implements CommandExecutor {
+public class CommandSetNitrousOxide implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -17,10 +17,10 @@ public class CommandSetMethane implements CommandExecutor {
         boolean triggered = false;
 
         try {
-            File methaneValueF = new File("plugins/EnvironmentalMechanics/globalwarming/methane.txt");
-            PluginDataInterpreter.write(methaneValueF, Double.parseDouble(args[0]));
+            File nitrousOxideValueF = new File("plugins/EnvironmentalMechanics/globalwarming/nitrousoxide.txt");
+            PluginDataInterpreter.write(nitrousOxideValueF, Double.parseDouble(args[0]));
 
-            sender.sendMessage(ChatColor.GREEN + "Successfully changed the methane level to "+args[0]+"!");
+            sender.sendMessage(ChatColor.GREEN + "Successfully changed the nitrous oxide level to "+args[0]+"!");
 
             triggered = true;
         }

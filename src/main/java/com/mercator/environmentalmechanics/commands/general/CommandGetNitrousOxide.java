@@ -1,4 +1,4 @@
-package com.mercator.environmentalmechanics.commands;
+package com.mercator.environmentalmechanics.commands.general;
 
 import com.mercator.environmentalmechanics.PluginDataInterpreter;
 import org.bukkit.ChatColor;

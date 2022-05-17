@@ -1,4 +1,4 @@
-package com.mercator.environmentalmechanics.commands;
+package com.mercator.environmentalmechanics.commands.general;
 
 import com.mercator.environmentalmechanics.greenhouseengine.WarmingEffects;
 import org.apache.commons.math3.util.Precision;
