@@ -29,7 +29,7 @@ public class WarmingEffects implements Listener {
     }
 
     @EventHandler
-    public static void cropGrowthDelay(BlockGrowEvent event) {
+    public void cropGrowthDelay(BlockGrowEvent event) {
         double failChance = 0.2 * (getTemperature() - 13);
 
         if (Math.random() <= failChance) {
@@ -38,7 +38,7 @@ public class WarmingEffects implements Listener {
     }
 
     @EventHandler
-    public static void forestFire(EntitySpawnEvent event) {
+    public void forestFire(EntitySpawnEvent event) {
         double failChance = 0.4 * (getTemperature() - 14);
     }
 }

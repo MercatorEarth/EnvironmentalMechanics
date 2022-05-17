@@ -1,9 +1,10 @@
 package com.mercator.environmentalmechanics;
 
-import org.bukkit.configuration.file.YamlConfiguration;
+import com.google.gson.Gson;
 
 import java.io.*;
-import java.util.HashMap;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Map;
 
 public class PluginDataInterpreter {
@@ -35,21 +36,18 @@ public class PluginDataInterpreter {
         return value;
     }
 
-    public static void genFloatMapFromConfig(YamlConfiguration config, Map<String, Float> map) {
-        for (String key : config.getKeys(false)) {
-            map.put(key, (Float) config.get(key));
-        }
-    }
+    public static Map<?, ?> genMapFromJson(Path path) {
+        Map<?, ?> returnValue = null;
 
-    public static void genIntMapFromConfig(YamlConfiguration config, Map<String, Integer> map) {
-        for (String key : config.getKeys(false)) {
-            map.put(key, (Integer) config.get(key));
+        try {
+            Gson gson = new Gson();
+            Reader reader = Files.newBufferedReader(path);
+            returnValue = gson.fromJson(reader, Map.class);
         }
-    }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
 
-    public static void genDoubleMapFromConfig(YamlConfiguration config, Map<String, Double> map) {
-        for (String key : config.getKeys(false)) {
-            map.put(key, (Double) config.get(key));
-        }
+        return returnValue;
     }
 }

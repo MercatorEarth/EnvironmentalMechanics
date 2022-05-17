@@ -1,0 +1,15 @@
+{
+  "entity": {
+    "CHICKEN": 0.5,
+    "COW": 1.5,
+    "SHEEP": 1,
+    "MUSHROOM_COW": 1.75,
+    "RABBIT": 0.5,
+    "PIG": 1.25
+  },
+
+  "block": {
+    "minecraft:stone": 0.01,
+    "minecraft:coal_ore": 0.5
+  }
+}

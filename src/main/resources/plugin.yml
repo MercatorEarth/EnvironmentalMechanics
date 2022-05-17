@@ -20,3 +20,12 @@ commands:
   temperature:
     usage: /temperature
     description: Displays the current global temperature in the server
+  setco2:
+    usage: /setco2 <amount>
+    description: Sets the carbon dioxide level in the server.
+  setch4:
+    usage: /setch4 <amount>
+    description: Sets the methane level in the server.
+  setn2o:
+    usage: /setn2o <amount>
+    description: Sets the nitrous oxide level in the server.
