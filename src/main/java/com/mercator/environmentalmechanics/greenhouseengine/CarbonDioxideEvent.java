@@ -1,15 +1,17 @@
 package com.mercator.environmentalmechanics.greenhouseengine;
 
 import com.mercator.environmentalmechanics.PluginDataInterpreter;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.FurnaceBurnEvent;
 import org.bukkit.inventory.ItemStack;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.Map;
+
+import static org.bukkit.Bukkit.getServer;
 
 public class CarbonDioxideEvent implements Listener {
 
@@ -22,13 +24,20 @@ public class CarbonDioxideEvent implements Listener {
         if (!carbonDioxideValueF.exists()) {
             carbonDioxideConcentration = 0;
 
-            PluginDataInterpreter.write(carbonDioxideValueF, carbonDioxideConcentration);
+            try {
+                carbonDioxideValueF.createNewFile();
+            }
+            catch (IOException e) {
+                getServer().getPluginManager().getPlugin("EnvironmentalMechanics").getLogger().warning("Failed to create data file for Carbon Dioxide!");
+            }
+
+            PluginDataInterpreter.write(carbonDioxideValueF, carbonDioxideConcentration, "globalwarming");
         }
         else {
             carbonDioxideConcentration = Double.parseDouble(PluginDataInterpreter.read(carbonDioxideValueF));
         }
 
-        carbonDioxideGenValues = (Map<String, Double>) PluginDataInterpreter.genMapFromJson(Paths.get("carbonDioxideGenValues.json"));
+        carbonDioxideGenValues = (Map<String, Double>) PluginDataInterpreter.genMapFromJson("models/carbonDioxideGenValues.json");
     }
 
     @EventHandler
@@ -39,6 +48,6 @@ public class CarbonDioxideEvent implements Listener {
         carbonDioxideConcentration += carbonDioxideGenValues.get(itemName);
 
         File carbonDioxideValueF = new File("plugins/EnvironmentalMechanics/globalwarming/carbondioxide.txt");
-        PluginDataInterpreter.write(carbonDioxideValueF, carbonDioxideConcentration);
+        PluginDataInterpreter.write(carbonDioxideValueF, carbonDioxideConcentration, "globalwarming");
     }
 }

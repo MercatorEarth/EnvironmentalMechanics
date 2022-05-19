@@ -7,11 +7,23 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Map;
 
+import static jdk.xml.internal.SecuritySupport.getClassLoader;
+
 public class PluginDataInterpreter {
 
-    public static void write(File file, Object value) {
+    public static void genDataDir(String module) {
+        File mainDataDir = new File("plugins/EnvironmentalMechanics");
+        File moduleDataDir = new File("plugins/EnvironmentalMechanics/"+module);
+
+        mainDataDir.mkdir();
+        moduleDataDir.mkdir();
+    }
+
+    public static void write(File file, Object value, String module) {
         try {
-            FileWriter fw = new java.io.FileWriter(file);
+            genDataDir(module);
+
+            FileWriter fw = new FileWriter(file);
             PrintWriter pw = new PrintWriter(fw);
 
             pw.println(value);
@@ -36,15 +48,18 @@ public class PluginDataInterpreter {
         return value;
     }
 
-    public static Map<?, ?> genMapFromJson(Path path) {
+    public static Map<?, ?> genMapFromJson(String path) {
         Map<?, ?> returnValue = null;
 
+        Gson gson = new Gson();
+
         try {
-            Gson gson = new Gson();
-            Reader reader = Files.newBufferedReader(path);
+            InputStream is = Class.forName("com.mercator.environmentalmechanics.PluginDataInterpreter").getClassLoader().getResourceAsStream(path);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+
             returnValue = gson.fromJson(reader, Map.class);
         }
-        catch (IOException e) {
+        catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
 

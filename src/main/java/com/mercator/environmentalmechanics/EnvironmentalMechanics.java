@@ -31,11 +31,11 @@ public final class EnvironmentalMechanics extends JavaPlugin {
         this.getCommand("getch4").setExecutor(new CommandGetMethane());
         this.getCommand("getn2o").setExecutor(new CommandGetNitrousOxide());
 
+        this.getCommand("temperature").setExecutor(new CommandTemperature());
+
         this.getCommand("setco2").setExecutor(new CommandSetCarbonDioxide());
         this.getCommand("setch4").setExecutor(new CommandSetMethane());
         this.getCommand("setn2o").setExecutor(new CommandSetNitrousOxide());
-
-        this.getCommand("temperature").setExecutor(new CommandTemperature());
 
         getServer().getPluginManager().getPlugin("EnvironmentalMechanics").getLogger().info("Environmental Mechanics enabled successfully!");
     }

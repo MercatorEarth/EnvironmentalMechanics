@@ -18,7 +18,7 @@ public class CommandSetCarbonDioxide implements CommandExecutor {
 
         try {
             File carbonDioxideValueF = new File("plugins/EnvironmentalMechanics/globalwarming/carbondioxide.txt");
-            PluginDataInterpreter.write(carbonDioxideValueF, Double.parseDouble(args[0]));
+            PluginDataInterpreter.write(carbonDioxideValueF, Double.parseDouble(args[0]), "globalwarming");
 
             sender.sendMessage(ChatColor.GREEN + "Successfully changed the carbon dioxide level to "+args[0]+"!");
 

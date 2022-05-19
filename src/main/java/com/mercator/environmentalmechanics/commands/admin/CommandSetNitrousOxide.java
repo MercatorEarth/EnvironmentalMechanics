@@ -18,7 +18,7 @@ public class CommandSetNitrousOxide implements CommandExecutor {
 
         try {
             File nitrousOxideValueF = new File("plugins/EnvironmentalMechanics/globalwarming/nitrousoxide.txt");
-            PluginDataInterpreter.write(nitrousOxideValueF, Double.parseDouble(args[0]));
+            PluginDataInterpreter.write(nitrousOxideValueF, Double.parseDouble(args[0]), "globalwarming");
 
             sender.sendMessage(ChatColor.GREEN + "Successfully changed the nitrous oxide level to "+args[0]+"!");
 

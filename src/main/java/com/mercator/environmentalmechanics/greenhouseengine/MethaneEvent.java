@@ -8,8 +8,11 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.Map;
+
+import static org.bukkit.Bukkit.getServer;
 
 public class MethaneEvent implements Listener {
 
@@ -22,13 +25,20 @@ public class MethaneEvent implements Listener {
         if (!methaneValueF.exists()) {
             methaneConcentration = 0;
 
-            PluginDataInterpreter.write(methaneValueF, methaneConcentration);
+            try {
+                methaneValueF.createNewFile();
+            }
+            catch (IOException e) {
+                getServer().getPluginManager().getPlugin("EnvironmentalMechanics").getLogger().warning("Failed to create data file for Methane!");
+            }
+
+            PluginDataInterpreter.write(methaneValueF, methaneConcentration, "globalwarming");
         }
         else {
             methaneConcentration = Double.parseDouble(PluginDataInterpreter.read(methaneValueF));
         }
 
-        methaneGenValues = (Map<String, Double>) PluginDataInterpreter.genMapFromJson(Paths.get("methaneGenValues.json"));
+        methaneGenValues = (Map<String, Double>) PluginDataInterpreter.genMapFromJson("models/methaneGenValues.json");
     }
 
     @EventHandler
@@ -39,7 +49,7 @@ public class MethaneEvent implements Listener {
             methaneConcentration += methaneGenValues.get(entityName);
 
             File methaneConcentrationF = new File("plugins/EnvironmentalMechanics/globalwarming/methane.txt");
-            PluginDataInterpreter.write(methaneConcentrationF, methaneConcentration);
+            PluginDataInterpreter.write(methaneConcentrationF, methaneConcentration, "globalwarming");
         }
     }
 
@@ -52,7 +62,7 @@ public class MethaneEvent implements Listener {
             methaneConcentration += methaneGenValues.get(blockName);
 
             File methaneConcentrationF = new File("plugins/EnvironmentalMechanics/globalwarming/methane.txt");
-            PluginDataInterpreter.write(methaneConcentrationF, methaneConcentration);
+            PluginDataInterpreter.write(methaneConcentrationF, methaneConcentration, "globalwarming");
         }
     }
 }

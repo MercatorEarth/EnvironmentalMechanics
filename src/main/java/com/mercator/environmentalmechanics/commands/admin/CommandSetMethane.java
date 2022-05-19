@@ -18,7 +18,7 @@ public class CommandSetMethane implements CommandExecutor {
 
         try {
             File methaneValueF = new File("plugins/EnvironmentalMechanics/globalwarming/methane.txt");
-            PluginDataInterpreter.write(methaneValueF, Double.parseDouble(args[0]));
+            PluginDataInterpreter.write(methaneValueF, Double.parseDouble(args[0]), "globalwarming");
 
             sender.sendMessage(ChatColor.GREEN + "Successfully changed the methane level to "+args[0]+"!");
 
