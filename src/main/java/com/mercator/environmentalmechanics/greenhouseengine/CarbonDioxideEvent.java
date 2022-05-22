@@ -8,7 +8,6 @@ import org.bukkit.inventory.ItemStack;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Paths;
 import java.util.Map;
 
 import static org.bukkit.Bukkit.getServer;

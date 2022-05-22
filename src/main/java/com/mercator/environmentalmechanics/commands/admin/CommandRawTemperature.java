@@ -1,4 +1,4 @@
-package com.mercator.environmentalmechanics.commands.general;
+package com.mercator.environmentalmechanics.commands.admin;
 
 import com.mercator.environmentalmechanics.climateengine.ClimateEngine;
 import org.apache.commons.math3.util.Precision;
@@ -8,7 +8,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class CommandTemperature implements CommandExecutor {
+public class CommandRawTemperature implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -16,8 +16,8 @@ public class CommandTemperature implements CommandExecutor {
         boolean triggered = false;
 
         try {
-            double temperature = ClimateEngine.getTemperatureAt(p.getLocation());
-            sender.sendMessage(ChatColor.YELLOW + "The current temperature at your location is " + Precision.round(temperature, 2) + ".");
+            double temperature = ClimateEngine.rawTemperature(p.getLocation());
+            sender.sendMessage(ChatColor.YELLOW + "The current raw temperature at your location is " + Precision.round(temperature, 2) + ".");
             triggered = true;
         }
         catch (Exception e) {

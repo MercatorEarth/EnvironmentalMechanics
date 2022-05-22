@@ -1,5 +1,6 @@
 package com.mercator.environmentalmechanics;
 
+import com.mercator.environmentalmechanics.commands.admin.CommandRawTemperature;
 import com.mercator.environmentalmechanics.commands.admin.CommandSetCarbonDioxide;
 import com.mercator.environmentalmechanics.commands.admin.CommandSetMethane;
 import com.mercator.environmentalmechanics.commands.admin.CommandSetNitrousOxide;
@@ -10,7 +11,7 @@ import com.mercator.environmentalmechanics.commands.general.CommandTemperature;
 import com.mercator.environmentalmechanics.greenhouseengine.CarbonDioxideEvent;
 import com.mercator.environmentalmechanics.greenhouseengine.MethaneEvent;
 import com.mercator.environmentalmechanics.greenhouseengine.NitrousOxideEvent;
-import com.mercator.environmentalmechanics.greenhouseengine.WarmingEffects;
+import com.mercator.environmentalmechanics.climateengine.WarmingEffects;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class EnvironmentalMechanics extends JavaPlugin {
@@ -32,6 +33,7 @@ public final class EnvironmentalMechanics extends JavaPlugin {
         this.getCommand("getn2o").setExecutor(new CommandGetNitrousOxide());
 
         this.getCommand("temperature").setExecutor(new CommandTemperature());
+        this.getCommand("rawtemperature").setExecutor(new CommandRawTemperature());
 
         this.getCommand("setco2").setExecutor(new CommandSetCarbonDioxide());
         this.getCommand("setch4").setExecutor(new CommandSetMethane());

@@ -9,7 +9,6 @@ import org.bukkit.event.entity.EntityDeathEvent;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Paths;
 import java.util.Map;
 
 import static org.bukkit.Bukkit.getServer;

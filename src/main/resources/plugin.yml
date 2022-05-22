@@ -19,7 +19,10 @@ commands:
     description: Displays the current nitrous oxide level in the server.
   temperature:
     usage: /temperature
-    description: Displays the current global temperature in the server
+    description: Displays the current temperature at your location.
+  rawtemperature:
+    usage: /rawtemperature
+    description: Displays the current raw temperature at your location.
   setco2:
     usage: /setco2 <amount>
     description: Sets the carbon dioxide level in the server.
