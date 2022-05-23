@@ -49,9 +49,8 @@ public class NitrousOxideEvent implements Listener {
 
     @EventHandler
     public void onPlayerFinishComposting (PlayerInteractEvent event) {
-        Block blockInteracted = event.getClickedBlock();
-
-        if (!blockInteracted.equals(null)) {
+        try {
+            Block blockInteracted = event.getClickedBlock();
             String blockName = blockInteracted.getType().getKey().toString();
 
             if (blockName.equals("minecraft:composter")) {
@@ -65,6 +64,9 @@ public class NitrousOxideEvent implements Listener {
                     PluginDataInterpreter.write(nitrousOxideValueF, nitrousOxideConcentration, "globalwarming");
                 }
             }
+        }
+        catch (NullPointerException e) {
+
         }
     }
 }

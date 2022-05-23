@@ -9,6 +9,12 @@ import org.bukkit.event.entity.EntitySpawnEvent;
 
 public class WarmingEffects implements Listener {
 
+    private ClimateEngine climateEngine;
+
+    public WarmingEffects() {
+        climateEngine = new ClimateEngine();
+    }
+
     public static void raisedSeaLevel(int amount) {
         int seaLevel = 63 + amount;
     }
@@ -18,7 +24,7 @@ public class WarmingEffects implements Listener {
         Block block = event.getBlock();
         Location location = block.getLocation();
 
-        double failChance = 0.2 * (ClimateEngine.getTemperatureAt(location) - 13);
+        double failChance = 0.2 * (climateEngine.getTemperatureAt(location) - 13);
 
         if (Math.random() <= failChance) {
             event.setCancelled(true);
@@ -29,6 +35,6 @@ public class WarmingEffects implements Listener {
     public void forestFire(EntitySpawnEvent event) {
         Location location = event.getLocation();
 
-        double failChance = 0.4 * (ClimateEngine.getTemperatureAt(location) - 14);
+        double failChance = 0.4 * (climateEngine.getTemperatureAt(location) - 14);
     }
 }

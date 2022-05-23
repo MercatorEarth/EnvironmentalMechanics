@@ -15,8 +15,10 @@ public class CommandTemperature implements CommandExecutor {
         Player p = (Player) sender;
         boolean triggered = false;
 
+        ClimateEngine climateEngine = new ClimateEngine();
+
         try {
-            double temperature = ClimateEngine.getTemperatureAt(p.getLocation());
+            double temperature = climateEngine.getTemperatureAt(p.getLocation());
             sender.sendMessage(ChatColor.YELLOW + "The current temperature at your location is " + Precision.round(temperature, 2) + ".");
             triggered = true;
         }
