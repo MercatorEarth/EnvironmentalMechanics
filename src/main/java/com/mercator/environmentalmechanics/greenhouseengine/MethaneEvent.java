@@ -37,7 +37,7 @@ public class MethaneEvent implements Listener {
             methaneConcentration = Double.parseDouble(PluginDataInterpreter.read(methaneValueF));
         }
 
-        methaneGenValues = (Map<String, Double>) PluginDataInterpreter.genMapFromJson("models/methaneGenValues.json");
+        methaneGenValues = (Map<String, Double>) PluginDataInterpreter.genMapFromJson("models/gas_models/methaneGenValues.json");
     }
 
     @EventHandler

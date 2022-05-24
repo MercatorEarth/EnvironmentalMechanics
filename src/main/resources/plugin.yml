@@ -32,3 +32,6 @@ commands:
   setn2o:
     usage: /setn2o <amount>
     description: Sets the nitrous oxide level in the server.
+  latitude:
+    usage: /latitude
+    description: Displays your current latitude.

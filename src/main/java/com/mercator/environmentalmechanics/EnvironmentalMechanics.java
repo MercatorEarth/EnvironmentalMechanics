@@ -4,10 +4,7 @@ import com.mercator.environmentalmechanics.commands.admin.CommandRawTemperature;
 import com.mercator.environmentalmechanics.commands.admin.CommandSetCarbonDioxide;
 import com.mercator.environmentalmechanics.commands.admin.CommandSetMethane;
 import com.mercator.environmentalmechanics.commands.admin.CommandSetNitrousOxide;
-import com.mercator.environmentalmechanics.commands.general.CommandGetCarbonDioxide;
-import com.mercator.environmentalmechanics.commands.general.CommandGetMethane;
-import com.mercator.environmentalmechanics.commands.general.CommandGetNitrousOxide;
-import com.mercator.environmentalmechanics.commands.general.CommandTemperature;
+import com.mercator.environmentalmechanics.commands.general.*;
 import com.mercator.environmentalmechanics.greenhouseengine.CarbonDioxideEvent;
 import com.mercator.environmentalmechanics.greenhouseengine.MethaneEvent;
 import com.mercator.environmentalmechanics.greenhouseengine.NitrousOxideEvent;
@@ -38,6 +35,8 @@ public final class EnvironmentalMechanics extends JavaPlugin {
         this.getCommand("setco2").setExecutor(new CommandSetCarbonDioxide());
         this.getCommand("setch4").setExecutor(new CommandSetMethane());
         this.getCommand("setn2o").setExecutor(new CommandSetNitrousOxide());
+
+        this.getCommand("latitude").setExecutor(new CommandLatitude());
 
         getServer().getPluginManager().getPlugin("EnvironmentalMechanics").getLogger().info("Environmental Mechanics enabled successfully!");
     }

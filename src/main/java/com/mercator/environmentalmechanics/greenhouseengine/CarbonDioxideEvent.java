@@ -36,7 +36,7 @@ public class CarbonDioxideEvent implements Listener {
             carbonDioxideConcentration = Double.parseDouble(PluginDataInterpreter.read(carbonDioxideValueF));
         }
 
-        carbonDioxideGenValues = (Map<String, Double>) PluginDataInterpreter.genMapFromJson("models/carbonDioxideGenValues.json");
+        carbonDioxideGenValues = (Map<String, Double>) PluginDataInterpreter.genMapFromJson("models/gas_models/carbonDioxideGenValues.json");
     }
 
     @EventHandler
