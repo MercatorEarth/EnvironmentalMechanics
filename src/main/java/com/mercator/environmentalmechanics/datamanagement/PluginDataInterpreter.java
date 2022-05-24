@@ -1,4 +1,4 @@
-package com.mercator.environmentalmechanics;
+package com.mercator.environmentalmechanics.datamanagement;
 
 import com.google.gson.Gson;
 
@@ -50,7 +50,7 @@ public class PluginDataInterpreter {
         Gson gson = new Gson();
 
         try {
-            InputStream is = Class.forName("com.mercator.environmentalmechanics.PluginDataInterpreter").getClassLoader().getResourceAsStream(path);
+            InputStream is = Class.forName("com.mercator.environmentalmechanics.datamanagement.PluginDataInterpreter").getClassLoader().getResourceAsStream(path);
             BufferedReader reader = new BufferedReader(new InputStreamReader(is));
 
             returnValue = gson.fromJson(reader, Map.class);

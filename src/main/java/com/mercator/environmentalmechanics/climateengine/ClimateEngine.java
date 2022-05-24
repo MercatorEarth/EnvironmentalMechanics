@@ -1,6 +1,6 @@
 package com.mercator.environmentalmechanics.climateengine;
 
-import com.mercator.environmentalmechanics.PluginDataInterpreter;
+import com.mercator.environmentalmechanics.datamanagement.PluginDataInterpreter;
 import org.bukkit.Location;
 import org.bukkit.block.Biome;
 import org.bukkit.block.Block;

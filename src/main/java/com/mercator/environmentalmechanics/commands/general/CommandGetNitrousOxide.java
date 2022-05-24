@@ -1,6 +1,6 @@
 package com.mercator.environmentalmechanics.commands.general;
 
-import com.mercator.environmentalmechanics.PluginDataInterpreter;
+import com.mercator.environmentalmechanics.datamanagement.PluginDataInterpreter;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

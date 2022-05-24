@@ -1,6 +1,6 @@
 package com.mercator.environmentalmechanics.greenhouseengine;
 
-import com.mercator.environmentalmechanics.PluginDataInterpreter;
+import com.mercator.environmentalmechanics.datamanagement.PluginDataInterpreter;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.FurnaceBurnEvent;

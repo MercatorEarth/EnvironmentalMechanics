@@ -1,6 +1,6 @@
 package com.mercator.environmentalmechanics.greenhouseengine;
 
-import com.mercator.environmentalmechanics.PluginDataInterpreter;
+import com.mercator.environmentalmechanics.datamanagement.PluginDataInterpreter;
 import org.bukkit.block.Block;
 import org.bukkit.block.data.Levelled;
 import org.bukkit.event.EventHandler;
