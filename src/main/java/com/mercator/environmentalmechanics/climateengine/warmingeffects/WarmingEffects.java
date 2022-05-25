@@ -3,6 +3,7 @@ package com.mercator.environmentalmechanics.climateengine.warmingeffects;
 import com.mercator.environmentalmechanics.climateengine.ClimateEngine;
 import com.mercator.environmentalmechanics.datamanagement.LinearEquation;
 import com.mercator.environmentalmechanics.datamanagement.PluginDataInterpreter;
+import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -69,6 +70,8 @@ public class WarmingEffects implements Listener {
 
         double failChance = 0.0;
 
+        Bukkit.getPluginManager().getPlugin("EnvironmentalMechanics").getLogger().info("EntitySpawnEvent");
+
         boolean loadedSuccessfully = true;
 
         if (!reference.isLoaded()) {
@@ -88,14 +91,10 @@ public class WarmingEffects implements Listener {
             failChanceEquation.generate(minimumTemperature, maximumFailChance, maximumTemperature, minimumFailChance);
 
             failChance = (failChanceEquation.slope * chunkTemperature) + failChanceEquation.yIntercept;
+            Bukkit.getPluginManager().getPlugin("EnvironmentalMechanics").getLogger().info(String.valueOf(failChance));
 
-            if (Math.random() <= failChance) {
-                Block referenceBlock = reference.getBlock((int) Math.round(Math.random() * 15.0), reference.getWorld().getHighestBlockYAt((int) Math.round(Math.random() * 15.0) + 1, (int) Math.round(Math.random() * 15.0)), (int) Math.round(Math.random() * 15.0));
-
-                if (referenceBlock.getType().isAir()) {
-                    Location blockLocation = referenceBlock.getLocation();
-                    referenceBlock.setType(Material.FIRE);
-                }
+            if (Math.random() >= failChance) {
+                reference.getWorld().getBlockAt(location).setType(Material.FIRE);
             }
         }
     }
