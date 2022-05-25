@@ -1,8 +1,11 @@
-package com.mercator.environmentalmechanics.climateengine;
+package com.mercator.environmentalmechanics.climateengine.warmingeffects;
 
+import com.mercator.environmentalmechanics.climateengine.ClimateEngine;
 import com.mercator.environmentalmechanics.datamanagement.LinearEquation;
 import com.mercator.environmentalmechanics.datamanagement.PluginDataInterpreter;
+import org.bukkit.Chunk;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -20,10 +23,6 @@ public class WarmingEffects implements Listener {
     public WarmingEffects() {
         climateEngine = new ClimateEngine();
         cropTemperatures = (Map<String, List<Double>>) PluginDataInterpreter.genMapFromJson("models/crop_models/idealCropTemperatures.json");
-    }
-
-    public static void raisedSeaLevel(int amount) {
-        int seaLevel = 63 + amount;
     }
 
     @EventHandler
@@ -66,7 +65,38 @@ public class WarmingEffects implements Listener {
     @EventHandler
     public void forestFire(EntitySpawnEvent event) {
         Location location = event.getLocation();
+        Chunk reference = location.getChunk();
 
-        double failChance = 0.4 * (climateEngine.getTemperatureAt(location) - 14);
+        double failChance = 0.0;
+
+        boolean loadedSuccessfully = true;
+
+        if (!reference.isLoaded()) {
+            loadedSuccessfully = reference.load();
+        }
+
+        if (loadedSuccessfully) {
+            double chunkTemperature = climateEngine.getAverageTemperature(reference);
+
+            double minimumFailChance = 0.0;
+            double maximumFailChance = 1.0;
+
+            double minimumTemperature = 35.0;
+            double maximumTemperature = 60.0;
+
+            LinearEquation failChanceEquation = new LinearEquation();
+            failChanceEquation.generate(minimumTemperature, maximumFailChance, maximumTemperature, minimumFailChance);
+
+            failChance = (failChanceEquation.slope * chunkTemperature) + failChanceEquation.yIntercept;
+
+            if (Math.random() <= failChance) {
+                Block referenceBlock = reference.getBlock((int) Math.round(Math.random() * 15.0), reference.getWorld().getHighestBlockYAt((int) Math.round(Math.random() * 15.0) + 1, (int) Math.round(Math.random() * 15.0)), (int) Math.round(Math.random() * 15.0));
+
+                if (referenceBlock.getType().isAir()) {
+                    Location blockLocation = referenceBlock.getLocation();
+                    referenceBlock.setType(Material.FIRE);
+                }
+            }
+        }
     }
 }

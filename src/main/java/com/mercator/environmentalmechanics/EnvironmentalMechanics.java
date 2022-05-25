@@ -8,7 +8,7 @@ import com.mercator.environmentalmechanics.commands.general.*;
 import com.mercator.environmentalmechanics.greenhouseengine.CarbonDioxideEvent;
 import com.mercator.environmentalmechanics.greenhouseengine.MethaneEvent;
 import com.mercator.environmentalmechanics.greenhouseengine.NitrousOxideEvent;
-import com.mercator.environmentalmechanics.climateengine.WarmingEffects;
+import com.mercator.environmentalmechanics.climateengine.warmingeffects.WarmingEffects;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class EnvironmentalMechanics extends JavaPlugin {

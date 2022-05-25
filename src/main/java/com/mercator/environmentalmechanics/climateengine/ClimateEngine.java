@@ -1,12 +1,15 @@
 package com.mercator.environmentalmechanics.climateengine;
 
 import com.mercator.environmentalmechanics.datamanagement.PluginDataInterpreter;
+import org.bukkit.Chunk;
 import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.block.Biome;
 import org.bukkit.block.Block;
 import org.bukkit.event.Listener;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.Map;
 
 public class ClimateEngine implements Listener {
@@ -52,5 +55,28 @@ public class ClimateEngine implements Listener {
         double temperatureValue = heightAdjustedTemperature + (((1.0 * carbonDioxideConcentration) + (25.0 * methaneConcentration) + (300.0 * nitrousOxideConcentration)) / 10000.0);
 
         return temperatureValue;
+    }
+
+    public double getAverageTemperature(Chunk chunk) {
+        Map<Location, Double> chunkBlockTemperatures = new HashMap<>();
+        World world = chunk.getWorld();
+
+        double average = 0.0;
+
+        for (int x = 0; x < 16; x++) {
+            for (int z = 0; z < 16; z++) {
+                Location location = new Location(world, x, world.getHighestBlockYAt(x, z), z);
+                double temperature = getTemperatureAt(location);
+                chunkBlockTemperatures.put(location, temperature);
+            }
+        }
+
+        for (double temperature : chunkBlockTemperatures.values()) {
+            average += temperature;
+        }
+
+        average /= chunkBlockTemperatures.size();
+
+        return average;
     }
 }
