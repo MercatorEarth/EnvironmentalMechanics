@@ -1,5 +1,7 @@
 package com.mercator.environmentalmechanics;
 
+import com.mercator.environmentalmechanics.climateengine.warmingeffects.RaisedSeaLevel;
+import com.mercator.environmentalmechanics.climateengine.warmingeffects.WarmingEffects;
 import com.mercator.environmentalmechanics.commands.admin.CommandRawTemperature;
 import com.mercator.environmentalmechanics.commands.admin.CommandSetCarbonDioxide;
 import com.mercator.environmentalmechanics.commands.admin.CommandSetMethane;
@@ -8,10 +10,11 @@ import com.mercator.environmentalmechanics.commands.general.*;
 import com.mercator.environmentalmechanics.greenhouseengine.CarbonDioxideEvent;
 import com.mercator.environmentalmechanics.greenhouseengine.MethaneEvent;
 import com.mercator.environmentalmechanics.greenhouseengine.NitrousOxideEvent;
-import com.mercator.environmentalmechanics.climateengine.warmingeffects.WarmingEffects;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class EnvironmentalMechanics extends JavaPlugin {
+
+    RaisedSeaLevel raisedSeaLevel;
 
     @Override
     public void onEnable() {
@@ -38,11 +41,14 @@ public final class EnvironmentalMechanics extends JavaPlugin {
 
         this.getCommand("latitude").setExecutor(new CommandLatitude());
 
+        raisedSeaLevel = new RaisedSeaLevel(this, 400, 400);
+
         getServer().getPluginManager().getPlugin("EnvironmentalMechanics").getLogger().info("Environmental Mechanics enabled successfully!");
     }
 
     @Override
     public void onDisable() {
         getServer().getPluginManager().getPlugin("EnvironmentalMechanics").getLogger().info("Environmental Mechanics disabled successfully!");
+        raisedSeaLevel.cancelLoop();
     }
 }

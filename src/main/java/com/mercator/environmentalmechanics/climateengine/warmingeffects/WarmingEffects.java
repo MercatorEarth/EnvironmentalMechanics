@@ -70,8 +70,6 @@ public class WarmingEffects implements Listener {
 
         double failChance = 0.0;
 
-        Bukkit.getPluginManager().getPlugin("EnvironmentalMechanics").getLogger().info("EntitySpawnEvent");
-
         boolean loadedSuccessfully = true;
 
         if (!reference.isLoaded()) {
@@ -84,14 +82,13 @@ public class WarmingEffects implements Listener {
             double minimumFailChance = 0.0;
             double maximumFailChance = 1.0;
 
-            double minimumTemperature = 35.0;
+            double minimumTemperature = 40.0;
             double maximumTemperature = 60.0;
 
             LinearEquation failChanceEquation = new LinearEquation();
             failChanceEquation.generate(minimumTemperature, maximumFailChance, maximumTemperature, minimumFailChance);
 
             failChance = (failChanceEquation.slope * chunkTemperature) + failChanceEquation.yIntercept;
-            Bukkit.getPluginManager().getPlugin("EnvironmentalMechanics").getLogger().info(String.valueOf(failChance));
 
             if (Math.random() >= failChance) {
                 reference.getWorld().getBlockAt(location).setType(Material.FIRE);

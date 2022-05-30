@@ -1,8 +1,12 @@
 package com.mercator.environmentalmechanics.datamanagement;
 
+import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
+import org.bukkit.Location;
+import org.bukkit.Material;
 
 import java.io.*;
+import java.lang.reflect.Type;
 import java.util.Map;
 
 public class PluginDataInterpreter {
@@ -56,6 +60,23 @@ public class PluginDataInterpreter {
             returnValue = gson.fromJson(reader, Map.class);
         }
         catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return returnValue;
+    }
+
+    public static Map<?, ?> genMapFromExternalJson(String path) {
+        Map<?, ?> returnValue = null;
+
+        Gson gson = new Gson();
+
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(path));
+
+            returnValue = gson.fromJson(reader, Map.class);
+        }
+        catch (FileNotFoundException e) {
             e.printStackTrace();
         }
 
