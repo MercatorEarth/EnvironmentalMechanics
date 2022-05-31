@@ -1,4 +1,4 @@
-package com.mercator.environmentalmechanics.climateengine.climateeffects;
+package com.mercator.environmentalmechanics.climateeffects;
 
 import com.google.gson.Gson;
 import com.mercator.environmentalmechanics.climateengine.ClimateEngine;
@@ -8,12 +8,10 @@ import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.metadata.MetadataValue;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 import java.io.IOException;
-import java.security.KeyException;
 import java.util.*;
 
 import static org.bukkit.Bukkit.getServer;

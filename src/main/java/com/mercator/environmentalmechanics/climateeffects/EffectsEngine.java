@@ -1,4 +1,4 @@
-package com.mercator.environmentalmechanics.climateengine.climateeffects;
+package com.mercator.environmentalmechanics.climateeffects;
 
 import com.mercator.environmentalmechanics.climateengine.ClimateEngine;
 import com.mercator.environmentalmechanics.datamanagement.LinearEquation;

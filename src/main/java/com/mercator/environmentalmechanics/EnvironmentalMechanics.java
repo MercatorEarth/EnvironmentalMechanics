@@ -1,7 +1,7 @@
 package com.mercator.environmentalmechanics;
 
-import com.mercator.environmentalmechanics.climateengine.climateeffects.EffectsEngine;
-import com.mercator.environmentalmechanics.climateengine.climateeffects.RaisedSeaLevel;
+import com.mercator.environmentalmechanics.climateeffects.EffectsEngine;
+import com.mercator.environmentalmechanics.climateeffects.RaisedSeaLevel;
 import com.mercator.environmentalmechanics.commands.admin.CommandRawTemperature;
 import com.mercator.environmentalmechanics.commands.admin.CommandSetCarbonDioxide;
 import com.mercator.environmentalmechanics.commands.admin.CommandSetMethane;

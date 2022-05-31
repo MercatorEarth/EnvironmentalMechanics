@@ -1,6 +1,6 @@
 package com.mercator.environmentalmechanics.commands.general;
 
-import com.mercator.environmentalmechanics.climateengine.BorderIntegration;
+import com.mercator.environmentalmechanics.datamanagement.BorderIntegration;
 import com.mercator.environmentalmechanics.climateengine.ClimateEngine;
 import org.apache.commons.math3.util.Precision;
 import org.bukkit.ChatColor;

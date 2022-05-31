@@ -1,5 +1,6 @@
 package com.mercator.environmentalmechanics.climateengine;
 
+import com.mercator.environmentalmechanics.datamanagement.BorderIntegration;
 import com.mercator.environmentalmechanics.datamanagement.PluginDataInterpreter;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
