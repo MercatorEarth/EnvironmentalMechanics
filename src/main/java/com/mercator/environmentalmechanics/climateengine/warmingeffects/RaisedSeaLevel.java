@@ -11,6 +11,7 @@ import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.*;
 
@@ -86,26 +87,52 @@ public class RaisedSeaLevel implements Runnable {
         Bukkit.getScheduler().cancelTask(this.taskID);
     }
 
-    public void raisedSeaLevel(int amount) {
-        newSeaLevel = baseSeaLevel + amount;
+    public int getSeaLevelInChunk(Chunk chunk) {
+        List<Integer> chunkCoordinates = new ArrayList<>();
+
+        chunkCoordinates.add(chunk.getX());
+        chunkCoordinates.add(chunk.getZ());
+
+        int chunkSeaLevelInt = baseSeaLevel;
 
         try {
-            File seaLevelF = new File("plugins/EnvironmentalMechanics/globalwarming/sealevel.txt");
-            PluginDataInterpreter.write(seaLevelF, newSeaLevel, "globalwarming");
+            File chunkSeaLevel = new File("plugins/EnvironmentalMechanics/globalwarming/sealevels/sealevel" + chunk.getX() + "_" + chunk.getZ() + ".txt");
+            chunkSeaLevelInt = Integer.parseInt(PluginDataInterpreter.read(chunkSeaLevel));
+        }
+        catch (Exception e) {
+            Bukkit.getLogger().warning("Failed to get sea level for chunk! Defaulting to "+baseSeaLevel+"!");
+        }
+
+        return chunkSeaLevelInt;
+    }
+
+    public void writeSeaLevelInChunk(int amount, Chunk chunk) {
+        List<Integer> chunkCoordinates = new ArrayList<>();
+
+        chunkCoordinates.add(chunk.getX());
+        chunkCoordinates.add(chunk.getZ());
+
+        try {
+            File chunkSeaLevel = new File("plugins/EnvironmentalMechanics/globalwarming/sealevels/sealevel" + chunk.getX() + "_" + chunk.getZ() + ".txt");
+            PluginDataInterpreter.write(chunkSeaLevel, amount, "globalwarming/sealevels");
         }
         catch (Exception e) {
             e.printStackTrace();
         }
+    }
 
-        if (newSeaLevel >= currentSeaLevel) {
-            Chunk[] chunks = world.getLoadedChunks();
+    public void adjustSeaLevelInChunk(Chunk chunk) {
+        chunk.setForceLoaded(true);
 
-            for (int level = currentSeaLevel; level < newSeaLevel + 1; level++) {
+        int chunkCurrentSeaLevel = getSeaLevelInChunk(chunk);
+
+        if (chunkCurrentSeaLevel < currentSeaLevel) {
+            for (int level = chunkCurrentSeaLevel; level < currentSeaLevel + 1; level++) {
                 Map<List<Integer>, String> blocks = new HashMap<>();
                 Map<String, String> blocksExisting = new HashMap<>();
 
-                if (new File("plugins/EnvironmentalMechanics/globalwarming/seablocks"+level+".json").exists()) {
-                    blocksExisting = (Map<String, String>) PluginDataInterpreter.genMapFromExternalJson("plugins/EnvironmentalMechanics/globalwarming/seablocks"+level+".json");
+                if (new File("plugins/EnvironmentalMechanics/globalwarming/seablocks/seablocks" + level + "_" + chunk.getX() + "_" + chunk.getZ() + ".json").exists()) {
+                    blocksExisting = (Map<String, String>) PluginDataInterpreter.genMapFromExternalJson("plugins/EnvironmentalMechanics/globalwarming/seablocks/seablocks" + level + "_" + chunk.getX() + "_" + chunk.getZ() + ".json");
 
                     for (String coordinates : blocksExisting.keySet()) {
                         String coordinatesRaw1 = coordinates.replace("[", "");
@@ -121,61 +148,45 @@ public class RaisedSeaLevel implements Runnable {
                     }
                 }
 
-                for (Chunk chunk : chunks) {
-                    for (int x = 0; x < 16; x++) {
-                        for (int z = 0; z < 16; z++) {
-                            Block reference = chunk.getBlock(x, level, z);
-                            if (replaceables.contains(reference.getType())) {
-                                List<Integer> coordinates = new ArrayList<>();
+                for (int x = 0; x < 16; x++) {
+                    for (int z = 0; z < 16; z++) {
+                        Block reference = chunk.getBlock(x, level, z);
+                        if (replaceables.contains(reference.getType())) {
+                            List<Integer> coordinates = new ArrayList<>();
 
-                                coordinates.add(reference.getLocation().getBlockX());
-                                coordinates.add(reference.getLocation().getBlockY());
-                                coordinates.add(reference.getLocation().getBlockZ());
+                            coordinates.add(reference.getLocation().getBlockX());
+                            coordinates.add(reference.getLocation().getBlockY());
+                            coordinates.add(reference.getLocation().getBlockZ());
 
-                                if (new File("plugins/EnvironmentalMechanics/globalwarming/seablocks"+level+".json").exists() && blocksExisting.containsKey(coordinates.toString())) {
-                                    assert true;
-                                }
-                                else {
-                                    blocks.put(coordinates, reference.getType().toString());
-                                }
-
-                                reference.setType(Material.WATER);
-                                reference.setMetadata("flooded", flooded);
+                            if (new File("plugins/EnvironmentalMechanics/globalwarming/seablocks/seablocks" + level + "_" + chunk.getX() + "_" + chunk.getZ() + ".json").exists() && blocksExisting.containsKey(coordinates.toString())) {
+                                assert true;
+                            } else {
+                                blocks.put(coordinates, reference.getType().toString());
                             }
+
+                            reference.setType(Material.WATER);
+                            reference.setMetadata("flooded", flooded);
                         }
                     }
                 }
-
                 Gson gson = new Gson();
                 String storedBlocks = gson.toJson(blocks);
 
                 try {
-                    File seaBlocksF = new File("plugins/EnvironmentalMechanics/globalwarming/seablocks" + level + ".json");
-                    PluginDataInterpreter.write(seaBlocksF, storedBlocks, "globalwarming");
+                    File seaBlocksF = new File("plugins/EnvironmentalMechanics/globalwarming/seablocks/seablocks" + level + "_" + chunk.getX() + "_" + chunk.getZ() + ".json");
+                    PluginDataInterpreter.write(seaBlocksF, storedBlocks, "globalwarming/seablocks");
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
-
-            try {
-                currentSeaLevel = newSeaLevel;
-                File seaLevelF = new File("plugins/EnvironmentalMechanics/globalwarming/sealevel.txt");
-                PluginDataInterpreter.write(seaLevelF, currentSeaLevel, "globalwarming");
-            }
-            catch (Exception e) {
-                e.printStackTrace();
-            }
+            writeSeaLevelInChunk(currentSeaLevel, chunk);
         }
-        else if (newSeaLevel < currentSeaLevel) {
-            Chunk[] chunks = world.getLoadedChunks();
-            String blocksJson;
+        else if (chunkCurrentSeaLevel > currentSeaLevel) {
             Map<String, String> blocks;
 
-            Gson gson = new Gson();
-
-            for (int level = newSeaLevel; level < currentSeaLevel + 1; level++) {
+            for (int level = currentSeaLevel; level < chunkCurrentSeaLevel + 1; level++) {
                 try {
-                    blocks = (Map<String, String>) PluginDataInterpreter.genMapFromExternalJson("plugins/EnvironmentalMechanics/globalwarming/seablocks"+level+".json");
+                    blocks = (Map<String, String>) PluginDataInterpreter.genMapFromExternalJson("plugins/EnvironmentalMechanics/globalwarming/seablocks/seablocks" + level + "_" + chunk.getX() + "_" + chunk.getZ() + ".json");
 
                     for (String coordinates : blocks.keySet()) {
                         String coordinatesRaw1 = coordinates.replace("[", "");
@@ -199,19 +210,27 @@ public class RaisedSeaLevel implements Runnable {
                     e.printStackTrace();
                 }
             }
+            writeSeaLevelInChunk(currentSeaLevel, chunk);
+        }
+        chunk.setForceLoaded(false);
+    }
 
-            try {
-                currentSeaLevel = newSeaLevel;
-                File seaLevelF = new File("plugins/EnvironmentalMechanics/globalwarming/sealevel.txt");
-                PluginDataInterpreter.write(seaLevelF, currentSeaLevel, "globalwarming");
-            }
-            catch (Exception e) {
-                e.printStackTrace();
-            }
+    public void setSeaLevel(int amount) {
+        newSeaLevel = baseSeaLevel + amount;
+
+        try {
+            currentSeaLevel = newSeaLevel;
+            File seaLevelF = new File("plugins/EnvironmentalMechanics/globalwarming/sealevel.txt");
+            PluginDataInterpreter.write(seaLevelF, currentSeaLevel, "globalwarming");
+        }
+        catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
-    public void temperatureBased(double temperature) {
+    public void raiseByTemperature(double temperature) {
+        Chunk[] chunks = world.getLoadedChunks();
+
         double minimumAmount = 0.0;
         double maximumAmount = 10.0;
 
@@ -231,11 +250,24 @@ public class RaisedSeaLevel implements Runnable {
         }
 
         int finalAmount = amount;
-        Bukkit.getScheduler().runTask(javaPlugin, () -> raisedSeaLevel(finalAmount));
+
+        setSeaLevel(finalAmount);
+
+        for (Chunk chunk : chunks) {
+            Bukkit.getScheduler().runTask(javaPlugin, () -> adjustSeaLevelInChunk(chunk));
+        }
+
+        try {
+            File seaLevelF = new File("plugins/EnvironmentalMechanics/globalwarming/sealevel.txt");
+            PluginDataInterpreter.write(seaLevelF, currentSeaLevel, "globalwarming");
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void run() {
         ClimateEngine climateEngine = new ClimateEngine();
-        temperatureBased(climateEngine.getTemperatureAt(new Location(world, 6825, 42, 12416)));
+        raiseByTemperature(climateEngine.getTemperatureAt(new Location(world, 6825, 42, 12416)));
     }
 }
