@@ -32,13 +32,17 @@ public class RaisedSeaLevel implements Runnable {
     private MetadataValue flooded = new FixedMetadataValue(Bukkit.getServer().getPluginManager().getPlugin("EnvironmentalMechanics"), true);
     private MetadataValue dry = new FixedMetadataValue(Bukkit.getServer().getPluginManager().getPlugin("EnvironmentalMechanics"), false);
 
-    private static final int baseSeaLevel = 63;
+    private static final int baseSeaLevel = 42;
+
+    public static boolean rising;
 
     public RaisedSeaLevel(JavaPlugin plugin, int initialDelay, int repeatDelay) {
         this.taskID = Bukkit.getScheduler().scheduleSyncRepeatingTask(plugin, this, initialDelay, repeatDelay);
 
         replaceables = new ArrayList<>();
         javaPlugin = plugin;
+
+        rising = false;
 
         File seaLevelF = new File("plugins/EnvironmentalMechanics/globalwarming/sealevel.txt");
         world = Bukkit.getWorld("world");
@@ -201,10 +205,8 @@ public class RaisedSeaLevel implements Runnable {
                         Location location = new Location(world, convertedCoordinates.get(0), convertedCoordinates.get(1), convertedCoordinates.get(2));
                         Block reference = world.getBlockAt(location);
 
-                        if (reference.getType().equals(Material.WATER) && reference.hasMetadata("flooded")) {
-                            reference.setType(Material.valueOf(blocks.get(coordinates)));
-                            reference.removeMetadata("flooded", javaPlugin);
-                        }
+                        reference.setType(Material.valueOf(blocks.get(coordinates)));
+                        reference.removeMetadata("flooded", javaPlugin);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -252,10 +254,14 @@ public class RaisedSeaLevel implements Runnable {
         int finalAmount = amount;
 
         setSeaLevel(finalAmount);
+        rising = true;
 
-        for (Chunk chunk : chunks) {
-            Bukkit.getScheduler().runTask(javaPlugin, () -> adjustSeaLevelInChunk(chunk));
+        for (int i = 0; i < chunks.length; i++) {
+            int finalI = i;
+            Bukkit.getScheduler().runTaskLater(javaPlugin, () -> adjustSeaLevelInChunk(chunks[finalI]), (finalI + 1) * 1L);
         }
+
+        rising = false;
 
         try {
             File seaLevelF = new File("plugins/EnvironmentalMechanics/globalwarming/sealevel.txt");
@@ -264,6 +270,10 @@ public class RaisedSeaLevel implements Runnable {
         catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public static boolean isRising() {
+        return rising;
     }
 
     public void run() {

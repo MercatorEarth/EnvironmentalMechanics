@@ -2,6 +2,7 @@ package com.mercator.environmentalmechanics;
 
 import com.mercator.environmentalmechanics.climateengine.warmingeffects.RaisedSeaLevel;
 import com.mercator.environmentalmechanics.climateengine.warmingeffects.WarmingEffects;
+import com.mercator.environmentalmechanics.climateengine.warmingeffects.WaterFlowFix;
 import com.mercator.environmentalmechanics.commands.admin.CommandRawTemperature;
 import com.mercator.environmentalmechanics.commands.admin.CommandSetCarbonDioxide;
 import com.mercator.environmentalmechanics.commands.admin.CommandSetMethane;
@@ -22,11 +23,13 @@ public final class EnvironmentalMechanics extends JavaPlugin {
         MethaneEvent methaneEvent = new MethaneEvent();
         NitrousOxideEvent nitrousOxideEvent = new NitrousOxideEvent();
         WarmingEffects warmingEffects = new WarmingEffects();
+        WaterFlowFix waterFlowFix = new WaterFlowFix();
 
         getServer().getPluginManager().registerEvents(carbonDioxideEvent, this);
         getServer().getPluginManager().registerEvents(methaneEvent, this);
         getServer().getPluginManager().registerEvents(nitrousOxideEvent, this);
         getServer().getPluginManager().registerEvents(warmingEffects, this);
+        getServer().getPluginManager().registerEvents(waterFlowFix, this);
 
         this.getCommand("getco2").setExecutor(new CommandGetCarbonDioxide());
         this.getCommand("getch4").setExecutor(new CommandGetMethane());
