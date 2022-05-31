@@ -47,19 +47,29 @@ public class ClimateEngine implements Listener {
         File methaneValueF = new File("plugins/EnvironmentalMechanics/globalwarming/methane.txt");
         File nitrousOxideValueF = new File("plugins/EnvironmentalMechanics/globalwarming/nitrousoxide.txt");
 
-        double carbonDioxideConcentration = Double.parseDouble(PluginDataInterpreter.read(carbonDioxideValueF));
-        double methaneConcentration = Double.parseDouble(PluginDataInterpreter.read(methaneValueF));
-        double nitrousOxideConcentration = Double.parseDouble(PluginDataInterpreter.read(nitrousOxideValueF));
+        double temperatureValue = 0.0;
 
-        double humidityAdjustFactor = 0.772 - (location.getBlock().getHumidity() * 0.25);
-        double latitudeAdjustFactorLinear = ((Math.abs(borderIntegration.getLatitude(location)) - 45.0) / 90.0) * variance;
-        double latitudeAdjustFactorQuadratic = (((variance / 4050) * Math.pow(borderIntegration.getLatitude(location), 2.0)) - (variance / 2.0));
-        double heightAdjustFactor = Math.abs(location.getBlockY() - location.getWorld().getSeaLevel()) / (1024 / location.getBlockY());
+        if (location.getWorld().getName().equals("world")) {
 
-        double baseTemperatureValue = convertRawTemperatureToCelsius(location);
-        double latitudeAdjustedTemperature = baseTemperatureValue - (humidityAdjustFactor * latitudeAdjustFactorQuadratic);
-        double heightAdjustedTemperature = latitudeAdjustedTemperature - heightAdjustFactor;
-        double temperatureValue = heightAdjustedTemperature + (((1.0 * carbonDioxideConcentration) + (25.0 * methaneConcentration) + (300.0 * nitrousOxideConcentration)) / 10000.0);
+            double carbonDioxideConcentration = Double.parseDouble(PluginDataInterpreter.read(carbonDioxideValueF));
+            double methaneConcentration = Double.parseDouble(PluginDataInterpreter.read(methaneValueF));
+            double nitrousOxideConcentration = Double.parseDouble(PluginDataInterpreter.read(nitrousOxideValueF));
+
+            double humidityAdjustFactor = 0.772 - (location.getBlock().getHumidity() * 0.25);
+            double latitudeAdjustFactorLinear = ((Math.abs(borderIntegration.getLatitude(location)) - 45.0) / 90.0) * variance;
+            double latitudeAdjustFactorQuadratic = (((variance / 4050) * Math.pow(borderIntegration.getLatitude(location), 2.0)) - (variance / 2.0));
+            double heightAdjustFactor = Math.abs(location.getBlockY() - location.getWorld().getSeaLevel()) / (1024 / location.getBlockY());
+
+            double baseTemperatureValue = convertRawTemperatureToCelsius(location);
+            double latitudeAdjustedTemperature = baseTemperatureValue - (humidityAdjustFactor * latitudeAdjustFactorQuadratic);
+            double heightAdjustedTemperature = latitudeAdjustedTemperature - heightAdjustFactor;
+
+            temperatureValue = heightAdjustedTemperature + (((1.0 * carbonDioxideConcentration) + (25.0 * methaneConcentration) + (300.0 * nitrousOxideConcentration)) / 10000.0);
+        }
+
+        else {
+            temperatureValue = convertRawTemperatureToCelsius(location);
+        }
 
         return temperatureValue;
     }

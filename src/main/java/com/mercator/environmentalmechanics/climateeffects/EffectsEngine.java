@@ -6,6 +6,7 @@ import com.mercator.environmentalmechanics.datamanagement.PluginDataInterpreter;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -86,32 +87,36 @@ public class EffectsEngine implements Listener {
     @EventHandler
     public void forestFire(EntitySpawnEvent event) {
         Location location = event.getLocation();
+        World world = location.getWorld();
         Chunk reference = location.getChunk();
 
-        double failChance = 0.0;
+        if (world.getName().equals("world")) {
 
-        boolean loadedSuccessfully = true;
+            double failChance = 0.0;
 
-        if (!reference.isLoaded()) {
-            loadedSuccessfully = reference.load();
-        }
+            boolean loadedSuccessfully = true;
 
-        if (loadedSuccessfully) {
-            double chunkTemperature = climateEngine.getAverageTemperature(reference);
+            if (!reference.isLoaded()) {
+                loadedSuccessfully = reference.load();
+            }
 
-            double minimumFailChance = 0.0;
-            double maximumFailChance = 1.0;
+            if (loadedSuccessfully) {
+                double chunkTemperature = climateEngine.getAverageTemperature(reference);
 
-            double minimumTemperature = 40.0;
-            double maximumTemperature = 60.0;
+                double minimumFailChance = 0.0;
+                double maximumFailChance = 1.0;
 
-            LinearEquation failChanceEquation = new LinearEquation();
-            failChanceEquation.generate(minimumTemperature, maximumFailChance, maximumTemperature, minimumFailChance);
+                double minimumTemperature = 40.0;
+                double maximumTemperature = 60.0;
 
-            failChance = (failChanceEquation.slope * chunkTemperature) + failChanceEquation.yIntercept;
+                LinearEquation failChanceEquation = new LinearEquation();
+                failChanceEquation.generate(minimumTemperature, maximumFailChance, maximumTemperature, minimumFailChance);
 
-            if (Math.random() >= failChance) {
-                reference.getWorld().getBlockAt(location).setType(Material.FIRE);
+                failChance = (failChanceEquation.slope * chunkTemperature) + failChanceEquation.yIntercept;
+
+                if (Math.random() >= failChance) {
+                    reference.getWorld().getBlockAt(location).setType(Material.FIRE);
+                }
             }
         }
     }
