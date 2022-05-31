@@ -1,12 +1,8 @@
 package com.mercator.environmentalmechanics.datamanagement;
 
-import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
-import org.bukkit.Location;
-import org.bukkit.Material;
 
 import java.io.*;
-import java.lang.reflect.Type;
 import java.util.Map;
 
 public class PluginDataInterpreter {

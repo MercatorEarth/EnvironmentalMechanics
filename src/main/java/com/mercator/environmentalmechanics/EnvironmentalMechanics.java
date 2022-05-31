@@ -1,8 +1,7 @@
 package com.mercator.environmentalmechanics;
 
-import com.mercator.environmentalmechanics.climateengine.warmingeffects.RaisedSeaLevel;
-import com.mercator.environmentalmechanics.climateengine.warmingeffects.WarmingEffects;
-import com.mercator.environmentalmechanics.climateengine.warmingeffects.WaterFlowFix;
+import com.mercator.environmentalmechanics.climateengine.climateeffects.EffectsEngine;
+import com.mercator.environmentalmechanics.climateengine.climateeffects.RaisedSeaLevel;
 import com.mercator.environmentalmechanics.commands.admin.CommandRawTemperature;
 import com.mercator.environmentalmechanics.commands.admin.CommandSetCarbonDioxide;
 import com.mercator.environmentalmechanics.commands.admin.CommandSetMethane;
@@ -22,14 +21,12 @@ public final class EnvironmentalMechanics extends JavaPlugin {
         CarbonDioxideEvent carbonDioxideEvent = new CarbonDioxideEvent();
         MethaneEvent methaneEvent = new MethaneEvent();
         NitrousOxideEvent nitrousOxideEvent = new NitrousOxideEvent();
-        WarmingEffects warmingEffects = new WarmingEffects();
-        WaterFlowFix waterFlowFix = new WaterFlowFix();
+        EffectsEngine effectsEngine = new EffectsEngine();
 
         getServer().getPluginManager().registerEvents(carbonDioxideEvent, this);
         getServer().getPluginManager().registerEvents(methaneEvent, this);
         getServer().getPluginManager().registerEvents(nitrousOxideEvent, this);
-        getServer().getPluginManager().registerEvents(warmingEffects, this);
-        getServer().getPluginManager().registerEvents(waterFlowFix, this);
+        getServer().getPluginManager().registerEvents(effectsEngine, this);
 
         this.getCommand("getco2").setExecutor(new CommandGetCarbonDioxide());
         this.getCommand("getch4").setExecutor(new CommandGetMethane());
@@ -44,14 +41,11 @@ public final class EnvironmentalMechanics extends JavaPlugin {
 
         this.getCommand("latitude").setExecutor(new CommandLatitude());
 
-        raisedSeaLevel = new RaisedSeaLevel(this, 400, 400);
-
         getServer().getPluginManager().getPlugin("EnvironmentalMechanics").getLogger().info("Environmental Mechanics enabled successfully!");
     }
 
     @Override
     public void onDisable() {
         getServer().getPluginManager().getPlugin("EnvironmentalMechanics").getLogger().info("Environmental Mechanics disabled successfully!");
-        raisedSeaLevel.cancelLoop();
     }
 }

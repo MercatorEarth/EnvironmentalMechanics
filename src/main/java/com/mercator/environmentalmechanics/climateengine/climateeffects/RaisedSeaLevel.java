@@ -1,4 +1,4 @@
-package com.mercator.environmentalmechanics.climateengine.warmingeffects;
+package com.mercator.environmentalmechanics.climateengine.climateeffects;
 
 import com.google.gson.Gson;
 import com.mercator.environmentalmechanics.climateengine.ClimateEngine;
@@ -8,11 +8,12 @@ import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.metadata.MetadataValue;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.security.KeyException;
 import java.util.*;
 
 import static org.bukkit.Bukkit.getServer;
@@ -25,6 +26,8 @@ public class RaisedSeaLevel implements Runnable {
 
     private int newSeaLevel;
     private int currentSeaLevel;
+
+    private Map<String, String> chunkSeaLevels;
 
     private World world;
     private JavaPlugin javaPlugin;
@@ -63,6 +66,20 @@ public class RaisedSeaLevel implements Runnable {
             currentSeaLevel = Integer.parseInt(PluginDataInterpreter.read(seaLevelF));
         }
 
+        File chunkSeaLevelsF = new File("plugins/EnvironmentalMechanics/globalwarming/chunksealevels.json");
+
+        if (!chunkSeaLevelsF.exists()) {
+            try {
+                chunkSeaLevelsF.createNewFile();
+                PluginDataInterpreter.write(chunkSeaLevelsF, "{}", "globalwarming");
+            }
+            catch (IOException e) {
+                getServer().getPluginManager().getPlugin("EnvironmentalMechanics").getLogger().warning("Failed to create chunk sea levels!");
+            }
+        }
+
+        chunkSeaLevels = (Map<String, String>) PluginDataInterpreter.genMapFromExternalJson("plugins/EnvironmentalMechanics/globalwarming/chunksealevels.json");
+
         replaceables.add(Material.AIR);
         replaceables.add(Material.TALL_GRASS);
         replaceables.add(Material.GRASS);
@@ -99,12 +116,8 @@ public class RaisedSeaLevel implements Runnable {
 
         int chunkSeaLevelInt = baseSeaLevel;
 
-        try {
-            File chunkSeaLevel = new File("plugins/EnvironmentalMechanics/globalwarming/sealevels/sealevel" + chunk.getX() + "_" + chunk.getZ() + ".txt");
-            chunkSeaLevelInt = Integer.parseInt(PluginDataInterpreter.read(chunkSeaLevel));
-        }
-        catch (Exception e) {
-            Bukkit.getLogger().warning("Failed to get sea level for chunk! Defaulting to "+baseSeaLevel+"!");
+        if (chunkSeaLevels.containsKey(chunk.getX() + "_" + chunk.getZ())) {
+            chunkSeaLevelInt = Integer.parseInt(chunkSeaLevels.get(chunk.getX() + "_" + chunk.getZ()));
         }
 
         return chunkSeaLevelInt;
@@ -117,8 +130,7 @@ public class RaisedSeaLevel implements Runnable {
         chunkCoordinates.add(chunk.getZ());
 
         try {
-            File chunkSeaLevel = new File("plugins/EnvironmentalMechanics/globalwarming/sealevels/sealevel" + chunk.getX() + "_" + chunk.getZ() + ".txt");
-            PluginDataInterpreter.write(chunkSeaLevel, amount, "globalwarming/sealevels");
+            chunkSeaLevels.put(chunk.getX() + "_" + chunk.getZ(), String.valueOf(amount));
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -270,6 +282,12 @@ public class RaisedSeaLevel implements Runnable {
         catch (Exception e) {
             e.printStackTrace();
         }
+
+        Gson gson = new Gson();
+        File chunkSeaLevelsF = new File("plugins/EnvironmentalMechanics/globalwarming/chunksealevels.json");
+
+        String chunkSeaLevelsR = gson.toJson(chunkSeaLevels);
+        PluginDataInterpreter.write(chunkSeaLevelsF, chunkSeaLevelsR, "globalwarming");
     }
 
     public static boolean isRising() {
