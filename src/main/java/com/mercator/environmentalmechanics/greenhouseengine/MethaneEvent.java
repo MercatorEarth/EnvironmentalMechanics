@@ -19,6 +19,12 @@ public class MethaneEvent implements Listener {
     private Map<String, Double> methaneGenValues;
 
     public MethaneEvent() {
+        methaneGenValues = (Map<String, Double>) PluginDataInterpreter.genMapFromJson("models/gas_models/methaneGenValues.json");
+
+        readMethaneValue();
+    }
+
+    public void readMethaneValue() {
         File methaneValueF = new File("plugins/EnvironmentalMechanics/globalwarming/methane.txt");
 
         if (!methaneValueF.exists()) {
@@ -36,12 +42,12 @@ public class MethaneEvent implements Listener {
         else {
             methaneConcentration = Double.parseDouble(PluginDataInterpreter.read(methaneValueF));
         }
-
-        methaneGenValues = (Map<String, Double>) PluginDataInterpreter.genMapFromJson("models/gas_models/methaneGenValues.json");
     }
 
     @EventHandler
     public void onDeathOfEntity(EntityDeathEvent event) {
+        readMethaneValue();
+
         String entityName = event.getEntityType().toString();
 
         if (methaneGenValues.containsKey(entityName)) {
@@ -54,6 +60,8 @@ public class MethaneEvent implements Listener {
 
     @EventHandler
     public void onPlayerMineBlock(BlockBreakEvent event) {
+        readMethaneValue();
+
         Block blockBroken = event.getBlock();
         String blockName = blockBroken.getType().getKey().toString();
 

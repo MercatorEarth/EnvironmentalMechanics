@@ -20,6 +20,10 @@ public class NitrousOxideEvent implements Listener {
     private Map<String, Double> nitrousOxideGenValues;
 
     public NitrousOxideEvent() {
+        readNitrousOxideValue();
+    }
+
+    public void readNitrousOxideValue() {
         File nitrousOxideValueF = new File("plugins/EnvironmentalMechanics/globalwarming/nitrousoxide.txt");
 
         if (!nitrousOxideValueF.exists()) {
@@ -41,6 +45,8 @@ public class NitrousOxideEvent implements Listener {
 
     @EventHandler
     public void onPlayerFertilizeBlock(BlockFertilizeEvent event) {
+        readNitrousOxideValue();
+
         nitrousOxideConcentration += 0.25;
 
         File nitrousOxideValueF = new File("plugins/EnvironmentalMechanics/globalwarming/nitrousoxide.txt");
@@ -49,6 +55,8 @@ public class NitrousOxideEvent implements Listener {
 
     @EventHandler
     public void onPlayerFinishComposting (PlayerInteractEvent event) {
+        readNitrousOxideValue();
+
         try {
             Block blockInteracted = event.getClickedBlock();
             String blockName = blockInteracted.getType().getKey().toString();

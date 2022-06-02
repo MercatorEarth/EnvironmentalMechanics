@@ -16,19 +16,25 @@ public class CommandLatitude implements CommandExecutor {
         Player p = (Player) sender;
         boolean triggered = false;
 
-        ClimateEngine climateEngine = new ClimateEngine();
-        BorderIntegration borderIntegration = climateEngine.borderIntegration;
+        if (p.hasPermission("envmechanics.get")) {
+            ClimateEngine climateEngine = new ClimateEngine();
+            BorderIntegration borderIntegration = climateEngine.borderIntegration;
 
-        try {
-            double latitude = borderIntegration.getLatitude(p.getLocation());
-            sender.sendMessage(ChatColor.YELLOW + "The latitude at your location is " + Precision.round(latitude, 2) + ".");
-            triggered = true;
+            try {
+                double latitude = borderIntegration.getLatitude(p.getLocation());
+                sender.sendMessage(ChatColor.YELLOW + "The latitude at your location is " + Precision.round(latitude, 2) + ".");
+                triggered = true;
+            } catch (Exception e) {
+                e.printStackTrace();
+                sender.sendMessage(ChatColor.RED + "An internal error has occurred!");
+
+                triggered = false;
+            }
         }
-        catch (Exception e) {
-            e.printStackTrace();
-            sender.sendMessage(ChatColor.RED + "An internal error has occurred!");
+        else {
+            sender.sendMessage(ChatColor.RED + "You do not have permission to use this command!");
 
-            triggered = false;
+            triggered = true;
         }
 
         return triggered;

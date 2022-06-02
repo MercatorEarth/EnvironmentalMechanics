@@ -25,7 +25,7 @@ public class EffectsEngine implements Listener {
     private ClimateEngine climateEngine;
     private Map<String, List<Double>> cropTemperatures;
 
-    private RaisedSeaLevel raisedSeaLevel;
+    public RaisedSeaLevel raisedSeaLevel;
 
     private JavaPlugin javaPlugin;
 

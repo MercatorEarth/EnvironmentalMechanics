@@ -1,7 +1,6 @@
 package com.mercator.environmentalmechanics;
 
 import com.mercator.environmentalmechanics.climateeffects.EffectsEngine;
-import com.mercator.environmentalmechanics.climateeffects.RaisedSeaLevel;
 import com.mercator.environmentalmechanics.commands.admin.CommandRawTemperature;
 import com.mercator.environmentalmechanics.commands.admin.CommandSetCarbonDioxide;
 import com.mercator.environmentalmechanics.commands.admin.CommandSetMethane;
@@ -13,8 +12,6 @@ import com.mercator.environmentalmechanics.greenhouseengine.NitrousOxideEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class EnvironmentalMechanics extends JavaPlugin {
-
-    RaisedSeaLevel raisedSeaLevel;
 
     @Override
     public void onEnable() {
@@ -40,6 +37,7 @@ public final class EnvironmentalMechanics extends JavaPlugin {
         this.getCommand("setn2o").setExecutor(new CommandSetNitrousOxide());
 
         this.getCommand("latitude").setExecutor(new CommandLatitude());
+        this.getCommand("sealevel").setExecutor(new CommandGetSeaLevel());
 
         getServer().getPluginManager().getPlugin("EnvironmentalMechanics").getLogger().info("Environmental Mechanics enabled successfully!");
     }

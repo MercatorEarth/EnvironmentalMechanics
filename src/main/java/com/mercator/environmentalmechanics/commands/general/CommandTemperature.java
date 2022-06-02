@@ -15,18 +15,24 @@ public class CommandTemperature implements CommandExecutor {
         Player p = (Player) sender;
         boolean triggered = false;
 
-        ClimateEngine climateEngine = new ClimateEngine();
+        if (p.hasPermission("envmechanics.get")) {
+            ClimateEngine climateEngine = new ClimateEngine();
 
-        try {
-            double temperature = climateEngine.getTemperatureAt(p.getLocation());
-            sender.sendMessage(ChatColor.YELLOW + "The current temperature at your location is " + Precision.round(temperature, 2) + ".");
-            triggered = true;
+            try {
+                double temperature = climateEngine.getTemperatureAt(p.getLocation());
+                sender.sendMessage(ChatColor.YELLOW + "The current temperature at your location is " + Precision.round(temperature, 2) + ".");
+                triggered = true;
+            } catch (Exception e) {
+                e.printStackTrace();
+                sender.sendMessage(ChatColor.RED + "An internal error has occurred!");
+
+                triggered = false;
+            }
         }
-        catch (Exception e) {
-            e.printStackTrace();
-            sender.sendMessage(ChatColor.RED + "An internal error has occurred!");
+        else {
+            sender.sendMessage(ChatColor.RED + "You do not have permission to use this command!");
 
-            triggered = false;
+            triggered = true;
         }
 
         return triggered;

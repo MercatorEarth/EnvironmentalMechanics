@@ -1,15 +1,13 @@
 package com.mercator.environmentalmechanics.commands.general;
 
-import com.mercator.environmentalmechanics.datamanagement.PluginDataInterpreter;
+import com.mercator.environmentalmechanics.climateeffects.EffectsEngine;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import java.io.File;
-
-public class CommandGetMethane implements CommandExecutor {
+public class CommandGetSeaLevel implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -17,12 +15,12 @@ public class CommandGetMethane implements CommandExecutor {
         boolean triggered = false;
 
         if (p.hasPermission("envmechanics.get")) {
+
+            EffectsEngine effectsEngine = new EffectsEngine();
+
             try {
-                File methaneValueF = new File("plugins/EnvironmentalMechanics/globalwarming/methane.txt");
-                Double methaneValue = Double.parseDouble(PluginDataInterpreter.read(methaneValueF));
-
-                sender.sendMessage(ChatColor.YELLOW + "The current methane level is " + Math.round(methaneValue) + ".");
-
+                int seaLevel = effectsEngine.raisedSeaLevel.getSeaLevel();
+                sender.sendMessage(ChatColor.YELLOW + "The current sea level is " + seaLevel + ".");
                 triggered = true;
             } catch (Exception e) {
                 e.printStackTrace();

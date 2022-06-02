@@ -35,3 +35,23 @@ commands:
   latitude:
     usage: /latitude
     description: Displays your current latitude.
+  sealevel:
+    usage: /sealevel
+    description: Displays the current sea level in the world.
+
+permissions:
+  envmechanics.*:
+    description: Gives access to all commands of Environmental Mechanics.
+    children:
+      envmechanics.set: true
+      envmechanics.getraw: true
+      envmechanics.get: true
+  envmechanics.set:
+    description: Gives access to all of the SET commands in Environmental Mechanics.
+    default: op
+  envmechanics.getraw:
+    description: Gives access to all the RAW GET commands in Environmental Mechanics.
+    default: op
+  envmechanics.get:
+    description: Gives access to all the GET commands in Environmental Mechanics.
+    default: true

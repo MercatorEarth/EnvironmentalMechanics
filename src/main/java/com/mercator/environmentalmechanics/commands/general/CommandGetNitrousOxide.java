@@ -16,19 +16,25 @@ public class CommandGetNitrousOxide implements CommandExecutor {
         Player p = (Player) sender;
         boolean triggered = false;
 
-        try {
-            File nitrousOxideValueF = new File("plugins/EnvironmentalMechanics/globalwarming/nitrousoxide.txt");
-            Double nitrousOxideValue = Double.parseDouble(PluginDataInterpreter.read(nitrousOxideValueF));
+        if (p.hasPermission("envmechanics.get")) {
+            try {
+                File nitrousOxideValueF = new File("plugins/EnvironmentalMechanics/globalwarming/nitrousoxide.txt");
+                Double nitrousOxideValue = Double.parseDouble(PluginDataInterpreter.read(nitrousOxideValueF));
 
-            sender.sendMessage(ChatColor.YELLOW + "The current nitrous oxide level is " + Math.round(nitrousOxideValue) + ".");
+                sender.sendMessage(ChatColor.YELLOW + "The current nitrous oxide level is " + Math.round(nitrousOxideValue) + ".");
+
+                triggered = true;
+            } catch (Exception e) {
+                e.printStackTrace();
+                sender.sendMessage(ChatColor.RED + "An internal error has occurred!");
+
+                triggered = false;
+            }
+        }
+        else {
+            sender.sendMessage(ChatColor.RED + "You do not have permission to use this command!");
 
             triggered = true;
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-            sender.sendMessage(ChatColor.RED + "An internal error has occurred!");
-
-            triggered = false;
         }
 
         return triggered;

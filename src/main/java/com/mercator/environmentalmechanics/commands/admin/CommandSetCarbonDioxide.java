@@ -16,17 +16,23 @@ public class CommandSetCarbonDioxide implements CommandExecutor {
         Player p = (Player) sender;
         boolean triggered = false;
 
-        try {
-            File carbonDioxideValueF = new File("plugins/EnvironmentalMechanics/globalwarming/carbondioxide.txt");
-            PluginDataInterpreter.write(carbonDioxideValueF, Double.parseDouble(args[0]), "globalwarming");
+        if (p.hasPermission("envmechanics.set")) {
+            try {
+                File carbonDioxideValueF = new File("plugins/EnvironmentalMechanics/globalwarming/carbondioxide.txt");
+                PluginDataInterpreter.write(carbonDioxideValueF, Double.parseDouble(args[0]), "globalwarming");
 
-            sender.sendMessage(ChatColor.GREEN + "Successfully changed the carbon dioxide level to "+args[0]+"!");
+                sender.sendMessage(ChatColor.GREEN + "Successfully changed the carbon dioxide level to " + args[0] + "!");
+
+                triggered = true;
+            } catch (Exception e) {
+                sender.sendMessage(ChatColor.RED + "Error processing the command! Either the syntax is incorrect, or something went wrong internally!");
+                e.printStackTrace();
+            }
+        }
+        else {
+            sender.sendMessage(ChatColor.RED + "You do not have permission to use this command!");
 
             triggered = true;
-        }
-        catch (Exception e) {
-            sender.sendMessage(ChatColor.RED + "Error processing the command! Either the syntax is incorrect, or something went wrong internally!");
-            e.printStackTrace();
         }
 
         return triggered;

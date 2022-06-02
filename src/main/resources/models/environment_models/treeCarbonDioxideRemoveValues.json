@@ -1,0 +1,21 @@
+{
+  "ACACIA": 1.25,
+  "AZALEA": 1.0,
+  "BIG_TREE": 1.5,
+  "BIRCH": 1.0,
+  "BROWN_MUSHROOM": 0.0,
+  "CHORUS_PLANT": 0.0,
+  "COCOA_TREE": 1.25,
+  "CRIMSON_FUNGUS": 0.0,
+  "DARK_OAK": 1.5,
+  "JUNGLE": 2.0,
+  "JUNGLE_BUSH": 0.5,
+  "MEGA_REDWOOD": 1.5,
+  "RED_MUSHROOM": 0.0,
+  "REDWOOD": 1.25,
+  "SMALL_JUNGLE": 1.25,
+  "SWAMP": 1.0,
+  "TALL_BIRCH": 1.25,
+  "TREE": 1.0,
+  "WARPED_FUNGUS": 1.5
+}

@@ -33,7 +33,7 @@ public class RaisedSeaLevel implements Runnable {
     private MetadataValue flooded = new FixedMetadataValue(Bukkit.getServer().getPluginManager().getPlugin("EnvironmentalMechanics"), true);
     private MetadataValue dry = new FixedMetadataValue(Bukkit.getServer().getPluginManager().getPlugin("EnvironmentalMechanics"), false);
 
-    private static final int baseSeaLevel = 42;
+    private static final int baseSeaLevel = 41;
 
     public static boolean rising;
 
@@ -104,6 +104,10 @@ public class RaisedSeaLevel implements Runnable {
 
     public void cancelLoop() {
         Bukkit.getScheduler().cancelTask(this.taskID);
+    }
+
+    public int getSeaLevel() {
+        return currentSeaLevel;
     }
 
     public int getSeaLevelInChunk(Chunk chunk) {
