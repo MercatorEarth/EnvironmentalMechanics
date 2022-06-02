@@ -10,6 +10,7 @@ import org.bukkit.block.Block;
 import org.bukkit.event.Listener;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,6 +18,7 @@ public class ClimateEngine implements Listener {
 
     public BorderIntegration borderIntegration;
     public double variance;
+    public double sensitivityFactor;
 
     private Map<String, Double> biomeTemperatures;
 
@@ -49,6 +51,21 @@ public class ClimateEngine implements Listener {
 
         double temperatureValue = 0.0;
 
+        File sensitivityFactorF = new File("plugins/EnvironmentalMechanics/globalwarming/sensitivity.txt");
+        if (!sensitivityFactorF.exists()) {
+            sensitivityFactor = 10000.0;
+            try {
+                sensitivityFactorF.createNewFile();
+                PluginDataInterpreter.write(sensitivityFactorF, sensitivityFactor, "globalwarming");
+            }
+            catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        else {
+            sensitivityFactor = Double.parseDouble(PluginDataInterpreter.read(sensitivityFactorF));
+        }
+
         if (location.getWorld().getName().equals("world")) {
 
             double carbonDioxideConcentration = Double.parseDouble(PluginDataInterpreter.read(carbonDioxideValueF));
@@ -64,7 +81,7 @@ public class ClimateEngine implements Listener {
             double latitudeAdjustedTemperature = baseTemperatureValue - (humidityAdjustFactor * latitudeAdjustFactorQuadratic);
             double heightAdjustedTemperature = latitudeAdjustedTemperature - heightAdjustFactor;
 
-            temperatureValue = heightAdjustedTemperature + (((1.0 * carbonDioxideConcentration) + (25.0 * methaneConcentration) + (300.0 * nitrousOxideConcentration)) / 10000.0);
+            temperatureValue = heightAdjustedTemperature + (((1.0 * carbonDioxideConcentration) + (25.0 * methaneConcentration) + (300.0 * nitrousOxideConcentration)) / sensitivityFactor);
         }
 
         else {
