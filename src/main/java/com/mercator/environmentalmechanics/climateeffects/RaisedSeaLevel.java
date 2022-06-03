@@ -175,9 +175,7 @@ public class RaisedSeaLevel implements Runnable {
                             coordinates.add(reference.getLocation().getBlockY());
                             coordinates.add(reference.getLocation().getBlockZ());
 
-                            if (new File("plugins/EnvironmentalMechanics/globalwarming/seablocks/seablocks" + level + "_" + chunk.getX() + "_" + chunk.getZ() + ".json").exists() && blocksExisting.containsKey(coordinates.toString())) {
-                                assert true;
-                            } else {
+                            if (!(new File("plugins/EnvironmentalMechanics/globalwarming/seablocks/seablocks" + level + "_" + chunk.getX() + "_" + chunk.getZ() + ".json").exists() && blocksExisting.containsKey(coordinates.toString()))) {
                                 blocks.put(coordinates, reference.getType().toString());
                             }
 
