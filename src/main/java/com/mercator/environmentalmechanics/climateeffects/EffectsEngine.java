@@ -18,6 +18,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.util.List;
 import java.util.Map;
 
+import static org.bukkit.Bukkit.getLogger;
 import static org.bukkit.Bukkit.getServer;
 
 public class EffectsEngine implements Listener {
@@ -92,16 +93,10 @@ public class EffectsEngine implements Listener {
 
         if (world.getName().equals("world")) {
 
-            double failChance = 0.0;
+            double failChance;
 
-            boolean loadedSuccessfully = true;
-
-            if (!reference.isLoaded()) {
-                loadedSuccessfully = reference.load();
-            }
-
-            if (loadedSuccessfully) {
-                double chunkTemperature = climateEngine.getAverageTemperature(reference);
+            if (reference.isLoaded()) {
+                double chunkTemperature = climateEngine.getTemperatureAt(location);
 
                 double minimumFailChance = 0.0;
                 double maximumFailChance = 1.0;

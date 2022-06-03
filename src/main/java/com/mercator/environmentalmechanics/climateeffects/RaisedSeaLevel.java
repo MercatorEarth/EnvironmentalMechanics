@@ -140,11 +140,10 @@ public class RaisedSeaLevel implements Runnable {
     }
 
     public void adjustSeaLevelInChunk(Chunk chunk) {
-        chunk.setForceLoaded(true);
-
         int chunkCurrentSeaLevel = getSeaLevelInChunk(chunk);
 
         if (chunkCurrentSeaLevel < currentSeaLevel) {
+            chunk.setForceLoaded(true);
             for (int level = chunkCurrentSeaLevel; level < currentSeaLevel + 1; level++) {
                 Map<List<Integer>, String> blocks = new HashMap<>();
                 Map<String, String> blocksExisting = new HashMap<>();
@@ -198,8 +197,10 @@ public class RaisedSeaLevel implements Runnable {
                 }
             }
             writeSeaLevelInChunk(currentSeaLevel, chunk);
+            chunk.setForceLoaded(false);
         }
         else if (chunkCurrentSeaLevel > currentSeaLevel) {
+            chunk.setForceLoaded(true);
             Map<String, String> blocks;
 
             for (int level = currentSeaLevel; level < chunkCurrentSeaLevel + 1; level++) {
@@ -227,8 +228,8 @@ public class RaisedSeaLevel implements Runnable {
                 }
             }
             writeSeaLevelInChunk(currentSeaLevel, chunk);
+            chunk.setForceLoaded(false);
         }
-        chunk.setForceLoaded(false);
     }
 
     public void setSeaLevel(int amount) {
