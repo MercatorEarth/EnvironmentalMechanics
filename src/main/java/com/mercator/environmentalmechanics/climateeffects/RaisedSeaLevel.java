@@ -187,12 +187,18 @@ public class RaisedSeaLevel implements Runnable {
                 Gson gson = new Gson();
                 String storedBlocks = gson.toJson(blocks);
 
-                try {
-                    File seaBlocksF = new File("plugins/EnvironmentalMechanics/globalwarming/seablocks/seablocks" + level + "_" + chunk.getX() + "_" + chunk.getZ() + ".json");
-                    PluginDataInterpreter.write(seaBlocksF, storedBlocks, "globalwarming/seablocks");
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                int chunkX = chunk.getX();
+                int chunkZ = chunk.getZ();
+
+                int finalLevel = level;
+                Bukkit.getScheduler().runTaskAsynchronously(javaPlugin, () -> {
+                    try {
+                        File seaBlocksF = new File("plugins/EnvironmentalMechanics/globalwarming/seablocks/seablocks" + finalLevel + "_" + chunkX + "_" + chunkZ + ".json");
+                        PluginDataInterpreter.write(seaBlocksF, storedBlocks, "globalwarming/seablocks");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                });
             }
             writeSeaLevelInChunk(currentSeaLevel, chunk);
             chunk.setForceLoaded(false);
