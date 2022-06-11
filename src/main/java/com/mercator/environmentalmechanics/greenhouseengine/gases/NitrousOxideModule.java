@@ -1,10 +1,8 @@
-package com.mercator.environmentalmechanics.greenhouseengine;
+package com.mercator.environmentalmechanics.greenhouseengine.gases;
 
 import com.mercator.environmentalmechanics.datamanagement.PluginDataInterpreter;
 import org.bukkit.block.Block;
 import org.bukkit.block.data.Levelled;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockFertilizeEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 
@@ -14,12 +12,12 @@ import java.util.Map;
 
 import static org.bukkit.Bukkit.getServer;
 
-public class NitrousOxideEvent implements Listener {
+public class NitrousOxideModule {
 
     public double nitrousOxideConcentration;
     private Map<String, Double> nitrousOxideGenValues;
 
-    public NitrousOxideEvent() {
+    public NitrousOxideModule() {
         readNitrousOxideValue();
     }
 
@@ -43,18 +41,16 @@ public class NitrousOxideEvent implements Listener {
         }
     }
 
-    @EventHandler
     public void onPlayerFertilizeBlock(BlockFertilizeEvent event) {
         readNitrousOxideValue();
 
-        nitrousOxideConcentration += 0.25;
+        nitrousOxideConcentration += 0.0125;
 
         File nitrousOxideValueF = new File("plugins/EnvironmentalMechanics/globalwarming/nitrousoxide.txt");
         PluginDataInterpreter.write(nitrousOxideValueF, nitrousOxideConcentration, "globalwarming");
     }
 
-    @EventHandler
-    public void onPlayerFinishComposting (PlayerInteractEvent event) {
+    public void onPlayerFinishComposting(PlayerInteractEvent event) {
         readNitrousOxideValue();
 
         try {
@@ -66,7 +62,7 @@ public class NitrousOxideEvent implements Listener {
                 Integer level = levelled.getLevel();
 
                 if (level == 8) {
-                    nitrousOxideConcentration += 1.0;
+                    nitrousOxideConcentration += 0.05;
 
                     File nitrousOxideValueF = new File("plugins/EnvironmentalMechanics/globalwarming/nitrousoxide.txt");
                     PluginDataInterpreter.write(nitrousOxideValueF, nitrousOxideConcentration, "globalwarming");
@@ -74,7 +70,7 @@ public class NitrousOxideEvent implements Listener {
             }
         }
         catch (NullPointerException e) {
-
+            assert true;
         }
     }
 }

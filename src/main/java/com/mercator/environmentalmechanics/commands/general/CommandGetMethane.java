@@ -1,6 +1,7 @@
 package com.mercator.environmentalmechanics.commands.general;
 
 import com.mercator.environmentalmechanics.datamanagement.PluginDataInterpreter;
+import org.apache.commons.math3.util.Precision;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -21,7 +22,7 @@ public class CommandGetMethane implements CommandExecutor {
                 File methaneValueF = new File("plugins/EnvironmentalMechanics/globalwarming/methane.txt");
                 Double methaneValue = Double.parseDouble(PluginDataInterpreter.read(methaneValueF));
 
-                sender.sendMessage(ChatColor.YELLOW + "The current methane level is " + Math.round(methaneValue) + ".");
+                sender.sendMessage(ChatColor.YELLOW + "The current methane level is " + Precision.round(methaneValue, 2) + ".");
 
                 triggered = true;
             } catch (Exception e) {

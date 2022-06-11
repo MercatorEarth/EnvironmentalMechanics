@@ -1,6 +1,7 @@
 package com.mercator.environmentalmechanics.commands.general;
 
 import com.mercator.environmentalmechanics.datamanagement.PluginDataInterpreter;
+import org.apache.commons.math3.util.Precision;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -21,7 +22,7 @@ public class CommandGetNitrousOxide implements CommandExecutor {
                 File nitrousOxideValueF = new File("plugins/EnvironmentalMechanics/globalwarming/nitrousoxide.txt");
                 Double nitrousOxideValue = Double.parseDouble(PluginDataInterpreter.read(nitrousOxideValueF));
 
-                sender.sendMessage(ChatColor.YELLOW + "The current nitrous oxide level is " + Math.round(nitrousOxideValue) + ".");
+                sender.sendMessage(ChatColor.YELLOW + "The current nitrous oxide level is " + Precision.round(nitrousOxideValue, 2) + ".");
 
                 triggered = true;
             } catch (Exception e) {

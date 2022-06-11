@@ -1,4 +1,4 @@
-package com.mercator.environmentalmechanics.climateeffects;
+package com.mercator.environmentalmechanics.climateeffects.effects;
 
 import com.google.gson.Gson;
 import com.mercator.environmentalmechanics.climateengine.ClimateEngine;
@@ -6,6 +6,7 @@ import com.mercator.environmentalmechanics.datamanagement.LinearEquation;
 import com.mercator.environmentalmechanics.datamanagement.PluginDataInterpreter;
 import org.bukkit.*;
 import org.bukkit.block.Block;
+import org.bukkit.event.block.BlockFromToEvent;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -16,7 +17,7 @@ import java.util.*;
 
 import static org.bukkit.Bukkit.getServer;
 
-public class RaisedSeaLevel implements Runnable {
+public class RaisedSeaLevelModule implements Runnable {
 
     private int taskID;
 
@@ -37,7 +38,7 @@ public class RaisedSeaLevel implements Runnable {
 
     public static boolean rising;
 
-    public RaisedSeaLevel(JavaPlugin plugin, int initialDelay, int repeatDelay) {
+    public RaisedSeaLevelModule(JavaPlugin plugin, int initialDelay, int repeatDelay) {
         this.taskID = Bukkit.getScheduler().scheduleSyncRepeatingTask(plugin, this, initialDelay, repeatDelay);
 
         replaceables = new ArrayList<>();
@@ -100,10 +101,6 @@ public class RaisedSeaLevel implements Runnable {
                 replaceables.add(material);
             }
         }
-    }
-
-    public void cancelLoop() {
-        Bukkit.getScheduler().cancelTask(this.taskID);
     }
 
     public int getSeaLevel() {
@@ -299,6 +296,15 @@ public class RaisedSeaLevel implements Runnable {
 
     public static boolean isRising() {
         return rising;
+    }
+
+    public void flowEvent(BlockFromToEvent event) {
+        Block reference = event.getBlock();
+        Material material = reference.getType();
+
+        if (material.equals(Material.WATER) && reference.hasMetadata("flooded")) {
+            event.setCancelled(true);
+        }
     }
 
     public void run() {

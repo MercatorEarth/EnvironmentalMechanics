@@ -1,9 +1,7 @@
-package com.mercator.environmentalmechanics.greenhouseengine;
+package com.mercator.environmentalmechanics.greenhouseengine.gases;
 
 import com.mercator.environmentalmechanics.datamanagement.PluginDataInterpreter;
 import org.bukkit.block.Block;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 
@@ -13,12 +11,12 @@ import java.util.Map;
 
 import static org.bukkit.Bukkit.getServer;
 
-public class MethaneEvent implements Listener {
+public class MethaneModule {
 
     public double methaneConcentration;
     private Map<String, Double> methaneGenValues;
 
-    public MethaneEvent() {
+    public MethaneModule() {
         methaneGenValues = (Map<String, Double>) PluginDataInterpreter.genMapFromJson("models/gas_models/methaneGenValues.json");
 
         readMethaneValue();
@@ -44,7 +42,6 @@ public class MethaneEvent implements Listener {
         }
     }
 
-    @EventHandler
     public void onDeathOfEntity(EntityDeathEvent event) {
         readMethaneValue();
 
@@ -58,7 +55,6 @@ public class MethaneEvent implements Listener {
         }
     }
 
-    @EventHandler
     public void onPlayerMineBlock(BlockBreakEvent event) {
         readMethaneValue();
 

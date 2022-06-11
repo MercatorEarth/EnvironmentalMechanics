@@ -22,7 +22,7 @@ public class CommandLatitude implements CommandExecutor {
 
             try {
                 double latitude = borderIntegration.getLatitude(p.getLocation());
-                sender.sendMessage(ChatColor.YELLOW + "The latitude at your location is " + Precision.round(latitude, 2) + ".");
+                sender.sendMessage(ChatColor.YELLOW + "The latitude at your location is " + Precision.round(latitude, 2) + " degrees.");
                 triggered = true;
             } catch (Exception e) {
                 e.printStackTrace();

@@ -1,13 +1,11 @@
 package com.mercator.environmentalmechanics.climateeffects;
 
+import com.mercator.environmentalmechanics.climateeffects.effects.AcidRainModule;
+import com.mercator.environmentalmechanics.climateeffects.effects.CropGrowthModule;
+import com.mercator.environmentalmechanics.climateeffects.effects.ForestFireModule;
+import com.mercator.environmentalmechanics.climateeffects.effects.RaisedSeaLevelModule;
 import com.mercator.environmentalmechanics.climateengine.ClimateEngine;
-import com.mercator.environmentalmechanics.datamanagement.LinearEquation;
 import com.mercator.environmentalmechanics.datamanagement.PluginDataInterpreter;
-import org.bukkit.Chunk;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.World;
-import org.bukkit.block.Block;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockFromToEvent;
@@ -18,7 +16,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.util.List;
 import java.util.Map;
 
-import static org.bukkit.Bukkit.getLogger;
 import static org.bukkit.Bukkit.getServer;
 
 public class EffectsEngine implements Listener {
@@ -26,7 +23,10 @@ public class EffectsEngine implements Listener {
     private ClimateEngine climateEngine;
     private Map<String, List<Double>> cropTemperatures;
 
-    public RaisedSeaLevel raisedSeaLevel;
+    public RaisedSeaLevelModule raisedSeaLevelModule;
+    public ForestFireModule forestFireModule;
+    public CropGrowthModule cropGrowthModule;
+    public AcidRainModule acidRainModule;
 
     private JavaPlugin javaPlugin;
 
@@ -35,84 +35,24 @@ public class EffectsEngine implements Listener {
 
         climateEngine = new ClimateEngine();
         cropTemperatures = (Map<String, List<Double>>) PluginDataInterpreter.genMapFromJson("models/crop_models/idealCropTemperatures.json");
-        raisedSeaLevel = new RaisedSeaLevel(javaPlugin, 400, 400);
+
+        raisedSeaLevelModule = new RaisedSeaLevelModule(javaPlugin, 400, 400);
+        acidRainModule = new AcidRainModule(javaPlugin, 40, 40);
+        forestFireModule = new ForestFireModule();
     }
 
     @EventHandler
-    public void flowEvent(BlockFromToEvent event) {
-        Block reference = event.getBlock();
-        Material material = reference.getType();
-
-        if (material.equals(Material.WATER) && reference.hasMetadata("flooded")) {
-            event.setCancelled(true);
-        }
+    public void blockFromToEvent(BlockFromToEvent event) {
+        raisedSeaLevelModule.flowEvent(event);
     }
 
     @EventHandler
-    public void cropGrowthDelay(BlockGrowEvent event) {
-        Block block = event.getBlock();
-        Location location = block.getLocation();
-        String blockName = block.getType().getKey().toString();
-
-        List<Double> temperatureRange = cropTemperatures.get(blockName);
-
-        double temperature = climateEngine.getTemperatureAt(location);
-
-        double minimumTemperature = temperatureRange.get(0);
-        double idealTemperature = temperatureRange.get(1);
-        double maximumTemperature = temperatureRange.get(2);
-
-        double maximumFailChance = 1.0;
-        double minimumFailChance = 0.0;
-
-        double failChance = 0.0;
-
-        LinearEquation lowEquation = new LinearEquation();
-        LinearEquation highEquation = new LinearEquation();
-
-        lowEquation.generate(idealTemperature, minimumFailChance, minimumTemperature, maximumFailChance);
-        highEquation.generate(idealTemperature, minimumFailChance, maximumTemperature, maximumFailChance);
-
-        if (temperature < idealTemperature) {
-            failChance = (lowEquation.slope * temperature) + lowEquation.yIntercept;
-        }
-        else if (temperature >= idealTemperature) {
-            failChance = (highEquation.slope * temperature) + highEquation.yIntercept;
-        }
-
-        if (Math.random() <= failChance) {
-            event.setCancelled(true);
-        }
+    public void blockGrowEvent(BlockGrowEvent event) {
+        cropGrowthModule.cropGrowthDelay(event, cropTemperatures, climateEngine);
     }
 
     @EventHandler
-    public void forestFire(EntitySpawnEvent event) {
-        Location location = event.getLocation();
-        World world = location.getWorld();
-        Chunk reference = location.getChunk();
-
-        if (world.getName().equals("world")) {
-
-            double failChance;
-
-            if (reference.isLoaded()) {
-                double chunkTemperature = climateEngine.getTemperatureAt(location);
-
-                double minimumFailChance = 0.0;
-                double maximumFailChance = 1.0;
-
-                double minimumTemperature = 40.0;
-                double maximumTemperature = 60.0;
-
-                LinearEquation failChanceEquation = new LinearEquation();
-                failChanceEquation.generate(minimumTemperature, maximumFailChance, maximumTemperature, minimumFailChance);
-
-                failChance = (failChanceEquation.slope * chunkTemperature) + failChanceEquation.yIntercept;
-
-                if (Math.random() >= failChance) {
-                    reference.getWorld().getBlockAt(location).setType(Material.FIRE);
-                }
-            }
-        }
+    public void entitySpawnEvent(EntitySpawnEvent event) {
+        forestFireModule.forestFire(event, climateEngine);
     }
 }

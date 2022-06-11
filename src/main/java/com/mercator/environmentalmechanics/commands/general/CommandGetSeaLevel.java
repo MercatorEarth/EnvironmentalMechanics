@@ -19,7 +19,7 @@ public class CommandGetSeaLevel implements CommandExecutor {
             EffectsEngine effectsEngine = new EffectsEngine();
 
             try {
-                int seaLevel = effectsEngine.raisedSeaLevel.getSeaLevel();
+                int seaLevel = effectsEngine.raisedSeaLevelModule.getSeaLevel();
                 sender.sendMessage(ChatColor.YELLOW + "The current sea level is " + seaLevel + ".");
                 triggered = true;
             } catch (Exception e) {

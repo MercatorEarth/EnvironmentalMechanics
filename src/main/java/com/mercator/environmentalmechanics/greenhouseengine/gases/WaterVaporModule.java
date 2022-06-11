@@ -1,8 +1,8 @@
-package com.mercator.environmentalmechanics.greenhouseengine;
+package com.mercator.environmentalmechanics.greenhouseengine.gases;
 
 import java.util.Map;
 
-public class WaterVaporEvent {
+public class WaterVaporModule {
     public double waterVaporConcentration;
     private Map<String, Double> waterVaporGenValues;
 }

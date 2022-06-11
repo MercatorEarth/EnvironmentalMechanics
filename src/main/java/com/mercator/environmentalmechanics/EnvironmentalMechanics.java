@@ -6,23 +6,17 @@ import com.mercator.environmentalmechanics.commands.admin.CommandSetCarbonDioxid
 import com.mercator.environmentalmechanics.commands.admin.CommandSetMethane;
 import com.mercator.environmentalmechanics.commands.admin.CommandSetNitrousOxide;
 import com.mercator.environmentalmechanics.commands.general.*;
-import com.mercator.environmentalmechanics.greenhouseengine.CarbonDioxideEvent;
-import com.mercator.environmentalmechanics.greenhouseengine.MethaneEvent;
-import com.mercator.environmentalmechanics.greenhouseengine.NitrousOxideEvent;
+import com.mercator.environmentalmechanics.greenhouseengine.GreenhouseEngine;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class EnvironmentalMechanics extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        CarbonDioxideEvent carbonDioxideEvent = new CarbonDioxideEvent();
-        MethaneEvent methaneEvent = new MethaneEvent();
-        NitrousOxideEvent nitrousOxideEvent = new NitrousOxideEvent();
+        GreenhouseEngine greenhouseEngine =  new GreenhouseEngine();
         EffectsEngine effectsEngine = new EffectsEngine();
 
-        getServer().getPluginManager().registerEvents(carbonDioxideEvent, this);
-        getServer().getPluginManager().registerEvents(methaneEvent, this);
-        getServer().getPluginManager().registerEvents(nitrousOxideEvent, this);
+        getServer().getPluginManager().registerEvents(greenhouseEngine, this);
         getServer().getPluginManager().registerEvents(effectsEngine, this);
 
         this.getCommand("getco2").setExecutor(new CommandGetCarbonDioxide());

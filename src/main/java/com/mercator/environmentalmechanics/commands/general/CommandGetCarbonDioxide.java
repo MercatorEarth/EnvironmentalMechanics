@@ -1,6 +1,7 @@
 package com.mercator.environmentalmechanics.commands.general;
 
 import com.mercator.environmentalmechanics.datamanagement.PluginDataInterpreter;
+import org.apache.commons.math3.util.Precision;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -21,7 +22,7 @@ public class CommandGetCarbonDioxide implements CommandExecutor {
                 File carbonDioxideValueF = new File("plugins/EnvironmentalMechanics/globalwarming/carbondioxide.txt");
                 Double carbonDioxideValue = Double.parseDouble(PluginDataInterpreter.read(carbonDioxideValueF));
 
-                sender.sendMessage(ChatColor.YELLOW + "The current carbon dioxide level is " + Math.round(carbonDioxideValue) + ".");
+                sender.sendMessage(ChatColor.YELLOW + "The current carbon dioxide level is " + Precision.round(carbonDioxideValue, 2) + ".");
 
                 triggered = true;
             } catch (Exception e) {

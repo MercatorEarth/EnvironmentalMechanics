@@ -1,9 +1,7 @@
-package com.mercator.environmentalmechanics.greenhouseengine;
+package com.mercator.environmentalmechanics.greenhouseengine.gases;
 
 import com.mercator.environmentalmechanics.datamanagement.PluginDataInterpreter;
 import org.bukkit.TreeType;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.FurnaceBurnEvent;
 import org.bukkit.event.world.StructureGrowEvent;
 import org.bukkit.inventory.ItemStack;
@@ -14,13 +12,13 @@ import java.util.Map;
 
 import static org.bukkit.Bukkit.getServer;
 
-public class CarbonDioxideEvent implements Listener {
+public class CarbonDioxideModule {
 
     public double carbonDioxideConcentration;
     private Map<String, Double> carbonDioxideGenValues;
     private Map<String, Double> carbonDioxideRemoveValues;
 
-    public CarbonDioxideEvent() {
+    public CarbonDioxideModule() {
         carbonDioxideGenValues = (Map<String, Double>) PluginDataInterpreter.genMapFromJson("models/gas_models/carbonDioxideGenValues.json");
         carbonDioxideRemoveValues = (Map<String, Double>) PluginDataInterpreter.genMapFromJson("models/environment_models/treeCarbonDioxideRemoveValues.json");
 
@@ -47,7 +45,6 @@ public class CarbonDioxideEvent implements Listener {
         }
     }
 
-    @EventHandler
     public void onPlayerBurnItemInFurnace(FurnaceBurnEvent event) {
         readCarbonDioxideValue();
 
@@ -60,7 +57,6 @@ public class CarbonDioxideEvent implements Listener {
         PluginDataInterpreter.write(carbonDioxideValueF, carbonDioxideConcentration, "globalwarming");
     }
 
-    @EventHandler
     public void treeGrowth(StructureGrowEvent event) {
         readCarbonDioxideValue();
 
