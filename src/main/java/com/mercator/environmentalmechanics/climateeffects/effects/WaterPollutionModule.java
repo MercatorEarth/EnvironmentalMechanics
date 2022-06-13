@@ -57,10 +57,7 @@ public class WaterPollutionModule implements Runnable {
             for (int z = 0; z < 16; z++) {
                 for (int y = mobLevel - 10; y < mobLevel + 5; y++) {
                     Block reference = chunk.getBlock(x, y, z);
-
-                    if (reference.getType().equals(Material.WATER)) {
-                        reference.setMetadata("polluted", polluted);
-                    }
+                    reference.setMetadata("polluted", polluted);
                 }
             }
         }
@@ -71,10 +68,7 @@ public class WaterPollutionModule implements Runnable {
             for (int z = 0; z < 16; z++) {
                 for (int y = mobLevel - 10; y < mobLevel + 5; y++) {
                     Block reference = chunk.getBlock(x, y, z);
-
-                    if (reference.getType().equals(Material.WATER)) {
-                        reference.setMetadata("softpolluted", softPolluted);
-                    }
+                    reference.setMetadata("softpolluted", softPolluted);
                 }
             }
         }
@@ -86,13 +80,11 @@ public class WaterPollutionModule implements Runnable {
                 for (int y = mobLevel - 10; y < mobLevel + 5; y++) {
                     Block reference = chunk.getBlock(x, y, z);
 
-                    if (reference.getType().equals(Material.WATER)) {
-                        if (reference.hasMetadata("polluted")) {
-                            reference.removeMetadata("polluted", javaPlugin);
-                        }
-                        else if (reference.hasMetadata("softpolluted")) {
-                            reference.removeMetadata("softpolluted", javaPlugin);
-                        }
+                    if (reference.hasMetadata("polluted")) {
+                        reference.removeMetadata("polluted", javaPlugin);
+                    }
+                    else if (reference.hasMetadata("softpolluted")) {
+                        reference.removeMetadata("softpolluted", javaPlugin);
                     }
                 }
             }
