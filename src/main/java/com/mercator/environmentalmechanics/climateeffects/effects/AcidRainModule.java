@@ -1,6 +1,6 @@
 package com.mercator.environmentalmechanics.climateeffects.effects;
 
-import com.mercator.environmentalmechanics.datamanagement.PluginDataInterpreter;
+import com.mercator.environmentalmechanics.climateeffects.EffectsEngine;
 import com.mercator.environmentalmechanics.greenhouseengine.GreenhouseEngine;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -8,13 +8,9 @@ import org.bukkit.World;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.io.File;
-import java.io.IOException;
-
 public class AcidRainModule implements Runnable {
 
     private int taskID;
-    private double sensitivityFactor;
 
     private JavaPlugin javaPlugin;
     private World world;
@@ -35,21 +31,7 @@ public class AcidRainModule implements Runnable {
         Location highestLocation = world.getHighestBlockAt(location).getLocation();
 
         double nitrousOxideConcentration = GreenhouseEngine.nitrousOxideModule.nitrousOxideConcentration;
-
-        File sensitivityFactorF = new File("plugins/EnvironmentalMechanics/globalwarming/sensitivity.txt");
-        if (!sensitivityFactorF.exists()) {
-            sensitivityFactor = 10000.0;
-            try {
-                sensitivityFactorF.createNewFile();
-                PluginDataInterpreter.write(sensitivityFactorF, sensitivityFactor, "globalwarming");
-            }
-            catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        else {
-            sensitivityFactor = Double.parseDouble(PluginDataInterpreter.read(sensitivityFactorF));
-        }
+        double sensitivityFactor = EffectsEngine.getSensitivityFactor();
 
         if (location.getBlockY() >= highestLocation.getBlockY() && !world.isClearWeather() && ((300 * nitrousOxideConcentration) / sensitivityFactor) > 3.0) {
             entity.damage(1.0);

@@ -38,6 +38,9 @@ commands:
   sealevel:
     usage: /sealevel
     description: Displays the current sea level in the world.
+  pollution:
+    usage: /pollution
+    description: Displays whether the block you are in is polluted.
 
 permissions:
   envmechanics.*:

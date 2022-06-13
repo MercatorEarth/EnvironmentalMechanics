@@ -1,9 +1,6 @@
 package com.mercator.environmentalmechanics.climateeffects;
 
-import com.mercator.environmentalmechanics.climateeffects.effects.AcidRainModule;
-import com.mercator.environmentalmechanics.climateeffects.effects.CropGrowthModule;
-import com.mercator.environmentalmechanics.climateeffects.effects.ForestFireModule;
-import com.mercator.environmentalmechanics.climateeffects.effects.RaisedSeaLevelModule;
+import com.mercator.environmentalmechanics.climateeffects.effects.*;
 import com.mercator.environmentalmechanics.climateengine.ClimateEngine;
 import com.mercator.environmentalmechanics.datamanagement.PluginDataInterpreter;
 import org.bukkit.event.EventHandler;
@@ -13,6 +10,8 @@ import org.bukkit.event.block.BlockGrowEvent;
 import org.bukkit.event.entity.EntitySpawnEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -27,6 +26,7 @@ public class EffectsEngine implements Listener {
     public ForestFireModule forestFireModule;
     public CropGrowthModule cropGrowthModule;
     public AcidRainModule acidRainModule;
+    public WaterPollutionModule waterPollutionModule;
 
     private JavaPlugin javaPlugin;
 
@@ -38,7 +38,30 @@ public class EffectsEngine implements Listener {
 
         raisedSeaLevelModule = new RaisedSeaLevelModule(javaPlugin, 400, 400);
         acidRainModule = new AcidRainModule(javaPlugin, 40, 40);
+        waterPollutionModule = new WaterPollutionModule(javaPlugin, 100, 100);
+        cropGrowthModule = new CropGrowthModule();
         forestFireModule = new ForestFireModule();
+    }
+
+    public static double getSensitivityFactor() {
+        double sensitivityFactor;
+
+        File sensitivityFactorF = new File("plugins/EnvironmentalMechanics/globalwarming/sensitivity.txt");
+        if (!sensitivityFactorF.exists()) {
+            sensitivityFactor = 10000.0;
+            try {
+                sensitivityFactorF.createNewFile();
+                PluginDataInterpreter.write(sensitivityFactorF, sensitivityFactor, "globalwarming");
+            }
+            catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        else {
+            sensitivityFactor = Double.parseDouble(PluginDataInterpreter.read(sensitivityFactorF));
+        }
+
+        return sensitivityFactor;
     }
 
     @EventHandler

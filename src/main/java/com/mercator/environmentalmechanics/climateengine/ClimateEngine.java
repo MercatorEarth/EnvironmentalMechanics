@@ -1,5 +1,6 @@
 package com.mercator.environmentalmechanics.climateengine;
 
+import com.mercator.environmentalmechanics.climateeffects.EffectsEngine;
 import com.mercator.environmentalmechanics.datamanagement.BorderIntegration;
 import com.mercator.environmentalmechanics.datamanagement.PluginDataInterpreter;
 import org.bukkit.Location;
@@ -7,7 +8,6 @@ import org.bukkit.block.Biome;
 import org.bukkit.block.Block;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.Map;
 
 public class ClimateEngine {
@@ -46,21 +46,7 @@ public class ClimateEngine {
         File nitrousOxideValueF = new File("plugins/EnvironmentalMechanics/globalwarming/nitrousoxide.txt");
 
         double temperatureValue = 0.0;
-
-        File sensitivityFactorF = new File("plugins/EnvironmentalMechanics/globalwarming/sensitivity.txt");
-        if (!sensitivityFactorF.exists()) {
-            sensitivityFactor = 10000.0;
-            try {
-                sensitivityFactorF.createNewFile();
-                PluginDataInterpreter.write(sensitivityFactorF, sensitivityFactor, "globalwarming");
-            }
-            catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        else {
-            sensitivityFactor = Double.parseDouble(PluginDataInterpreter.read(sensitivityFactorF));
-        }
+        sensitivityFactor = EffectsEngine.getSensitivityFactor();
 
         if (location.getWorld().getName().equals("world")) {
 
